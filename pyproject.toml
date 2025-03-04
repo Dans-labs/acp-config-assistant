@@ -1,0 +1,16 @@
+[project]
+name = "acp-config-assistant"
+version = "0.1.0"
+description = "Recommend repository or repositories based on deposit attributes<br/>Recommend metadata schema and profile based on repository, format and domain"
+authors = [{name = "Eko Indarto", email = "eko.indarto@dans.knaw.nl"}]
+readme = "README.md"
+title = "ACP Config Assistant"
+requires-python = ">=3.12"
+dependencies = [
+    "akmi-utils>=0.1.5.2",
+    "dynaconf>=3.2.10",
+    "emoji>=2.14.1",
+    "jmespath>=1.0.1",
+    "json-logic>=0.6.3",
+    "python-keycloak>=5.3.1",
+]

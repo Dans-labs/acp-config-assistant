@@ -1,0 +1,54 @@
+{
+    "assistant-config-name": "dataverseNL-Groningen",
+    "app-name": "hello",
+    "targets": [
+        {
+            "repo-pid": "1",
+            "repo-name": "portal.devstack.odissei.nl",
+            "repo-display-name": "Portal ODISSEI DEV",
+            "bridge-plugin-name": "DataverseIngester",
+            "base-url": "https://portal.devstack.odissei.nl",
+            "target-url": "https://portal.devstack.odissei.nl/api/dataverses/DV_NL/datasets/:import",
+            "target-url-params": "pid=$PID&release=no",
+            "payload": {
+                "doi": "",
+                "metadata_format": "",
+                "base_url": ""
+            }, 
+            "metadata": {
+                "processed-metadata": [
+                    {
+                        "hook-name": "odissei", 
+                        "process-function": "dataverse_metadata_fetcher",
+                        "service-url": "https://dataverse-fetcher.labs.dansdemo.nl/dataverse-metadata-fetcher",
+                        "name": "fetcher"
+                    },
+                    {
+                        "hook-name": "odissei",
+                        "process-function": "dataverse_mapper",
+                        "service-url": "https://dataverse-mapper.labs.dansdemo.nl/mapper",
+                        "name": "mapper"
+                    },
+                    {
+                        "hook-name": "odissei",
+                        "service-url": "https://metadata-refiner.labs.dansdemo.nl/metadata-refinement/datastation",
+                        "process-function": "refine_metadata",
+                        "name": "refiner"
+                    },
+                    {
+                        "hook-name": "odissei",
+                        "service-url": "https://version-tracker.labs.dansdemo.nl",
+                        "process-function": "add_workflow_versioning_url",
+                        "name": "version"
+                    },
+                    {
+                        "hook-name": "odissei",
+                        "service-url": "https://metadata-enhancer.labs.dansdemo.nl/enrich/elsst/en",
+                        "process-function": "enrich_metadata",
+                        "name": "enhancer"
+                    }
+                ]
+            }             
+        }
+    ]
+}

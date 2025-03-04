@@ -1,0 +1,13 @@
+{
+    "4TU ResearchData": {
+        "displayName": {
+            "en": "4TU.ResearchData",
+            "nl": "4TU.ResearchData"
+        },
+        "description": {
+            "en": "Deposit data in this repository for science, engineering and design",
+            "nl": "Deponeer data in dit repository voor exacte wetenschappen, engineering en ontwerp."
+        },
+        "external": "https://data.4tu.nl/"
+    }
+}
