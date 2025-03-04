@@ -1,0 +1,26 @@
+[
+    {
+        "label": "Audiovisual Materials",
+        "value": "audiovisual_materials"
+    },
+    {
+        "label": "Statistical Data",
+        "value": "statistical_data"
+    },
+    {
+        "label": "Geospatial Data Files",
+        "value": "geospatial_data_files"
+    },
+    {
+        "label": "NetCDF and HDF Files",
+        "value": "netcdf_and_hdf_files"
+    },
+    {
+        "label": "Darwin Core and Ecological markup Language Files",
+        "value": "darwin_core_and_ecological_markup_language_files"
+    },
+    {
+        "label": "Other",
+        "value": "other"
+    }
+]

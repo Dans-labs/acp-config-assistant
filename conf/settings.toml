@@ -1,0 +1,29 @@
+[default]
+
+repositories_conf_dir = "@format {env[BASE_DIR]}/resources/saved-repos-conf"
+repositories_schema_dir = "@format {env[BASE_DIR]}/resources/repo-schemas"
+
+otlp_enable = false
+log_file = "@format {env[BASE_DIR]}/logs/aca.log"
+#log_file = "@format {env[BASE_DIR]}/logs/ras.log"
+log_level = 10
+log_format = "%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s"
+
+dans_formats_url = "https://raw.githubusercontent.com/ekoi/DANS-File-Formats/draft/dans-file-formats.json"
+
+transformer_url = "http://localhost:1745/transform/4tu-narcis-mapping.xsl"
+
+repo_file_types = "@format {env[BASE_DIR]}/conf/file-types.json"
+repo_available_list = "@format {env[BASE_DIR]}/conf/K.24.2.json"
+
+institution_list = ["Delft University of Technology", "Wageningen University and Research Centre", "Eindhoven University of Technology", "University of Twente", "Delft University of Technology", "Wageningen University and Research Centre", "Eindhoven University of Technology", "University of Twente", "Delft University of Technology", "Wageningen University and Research Centre", "Eindhoven University of Technology", "University of Twente"]
+
+domain_list = ["Social Sciences", "Arts and Humanities", "Engineering"]
+
+
+[default.keycloak_4tu_demo]
+    url="https://keycloak.dansdemo.nl"
+    realms="4tu"
+    client_id="4tu-auth"
+
+

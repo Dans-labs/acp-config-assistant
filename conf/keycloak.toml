@@ -1,0 +1,23 @@
+[default]
+
+[default.keycloak_ohsmart_demo]
+    url="https://keycloak.dansdemo.nl"
+    realms="ohsmart"
+    client_id="ohsmart-auth"
+
+[default.keycloak_ohsmart_dev]
+    url="http://localhost:9090"
+    realms="ohsmart"
+    client_id="ohsmart-auth"
+
+[default.keycloak_ohsmart_prod]
+    url="https://keycloak.dans.knaw.nl"
+    realms="ohsmart"
+    client_id="ohsmart-auth"
+
+[default.keycloak_local]
+    url="https://keycloak.dansdemo.nl"
+    realms="4tu"
+    client_id="4tu-auth"
+
+

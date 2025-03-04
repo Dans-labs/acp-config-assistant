@@ -1,0 +1,534 @@
+{
+    "Dataverse.NL": {
+        "form": [
+            {
+                "id": "citation",
+                "title": {
+                    "en": "Citation",
+                    "nl": "Citaten"
+                },
+                "fields": [
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Title",
+                            "nl": "Titel"
+                        },
+                        "name": "title",
+                        "required": true,
+                        "description": {
+                            "en": "A descriptive title for the work, to be used in citations",
+                            "nl": "Een beschrijvende titel voor deze data, wordt gebruikt in referenties."
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Subtitle",
+                            "nl": "Ondertitel"
+                        },
+                        "name": "subtitle",
+                        "noIndicator": true,
+                        "description": {
+                            "en": "You can provide a subtitle if you wish",
+                            "nl": "Je kunt een optionele ondertitel opgeven als je wilt"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Description",
+                            "nl": "Beschrijving"
+                        },
+                        "name": "description",
+                        "multiline": true,
+                        "required": true,
+                        "description": {
+                            "en": "Provide some context on the data set, a short summary on what it's about. Basic HTML tags are allowed.",
+                            "nl": "Geef wat context bij de dataset, een korte samenvatting van waar het over gaat. Simpele HTML tags zijn toegestaan."
+                        }
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Publisher",
+                            "nl": "Uitgever"
+                        },
+                        "name": "publisher",
+                        "required": true,
+                        "description": {
+                            "en": "Institution - often the rights holder",
+                            "nl": "Instituut - vaak de rechthebbende"
+                        },
+                        "options": "ror",
+                        "allowFreeText": true
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Author",
+                            "nl": "Auteur"
+                        },
+                        "name": "author",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Add one or more authors.",
+                            "nl": "Voeg een of meerdere auteurs toe"
+                        },
+                        "fields": [
+                            {
+                                "type": "autocomplete",
+                                "label": {
+                                    "en": "Name",
+                                    "nl": "Naam"
+                                },
+                                "name": "name",
+                                "required": true,
+                                "description": {
+                                    "en": "First and last name",
+                                    "nl": "Voor en achternaam"
+                                },
+                                "options": "orcid",
+                                "allowFreeText": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "affiliation",
+                                "required": true,
+                                "description": {
+                                    "en": "",
+                                    "nl": ""
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Grant information",
+                            "nl": "Beursinformatie"
+                        },
+                        "name": "grant",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Optional information if a grant was involved in financing the project",
+                            "nl": "Optionele informatie als het project met behulp van subsidie tot stand is gekomen"
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Grant agency",
+                                    "nl": "Subsidieverstrekker"
+                                },
+                                "name": "grant_agency",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Information about the agency providing a grant",
+                                    "nl": "Informatie over de verstrekker van de beurs of subsidie"
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Grant number/identifier",
+                                    "nl": "Dossiernummer van de verstrekte subsidie"
+                                },
+                                "name": "grant_number",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Information about the grant number or identifier",
+                                    "nl": "Informatie over het dossiernummer van de beurs of subsidie"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "coverage",
+                "title": {
+                    "en": "Coverage",
+                    "nl": "Dekking"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Subject keywords",
+                            "nl": "Trefwoorden bij onderwerp"
+                        },
+                        "name": "subject_keywords",
+                        "required": true,
+                        "multiselect": true,
+                        "description": {
+                            "en": "Enter keywords that describe the content of your dataset in terms of artistic or architectural subject matter. Keywords may either be selected from the Getty Art & Architecture Thesaurus (AAT), or entered as free text. These keywords have a different scope from the 'Humanities' domain-specific keywords (below), which should be selected from the European Languages Social Sciences Thesaurus (ELSST), and which describe the content of your dataset in terms of social relations, interactions or phenomena, or ways to study them.",
+                            "nl": "Voer trefwoorden in die de inhoud van de dataset beschrijven op het gebied van artistieke of architectonische onderwerpen. Trefwoorden kunnen worden geselecteerd uit de Getty Art & Architecture Thesaurus (AAT) of worden ingevoerd als vrije tekst. Deze trefwoorden hebben een andere reikwijdte dan de 'Geesteswetenschappen' domeinspecifieke trefwoorden (hieronder), die moeten worden geselecteerd uit de European Languages Social Sciences Thesaurus (ELSST) en die de inhoud van uw dataset beschrijven in termen van sociale relaties, interacties of verschijnselen, of manieren om ze te bestuderen."
+                        },
+                        "options": "getty",
+                        "allowFreeText": true
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Period covered in the dataset",
+                            "nl": "Periode behandeld in de dataset"
+                        },
+                        "name": "subject_date_time",
+                        "repeatable": true,
+                        "description": {
+                            "en": "The dates and times the material deals with",
+                            "nl": "De data en tijden waarover het materiaal gaat"
+                        },
+                        "fields": [
+                            {
+                                "type": "daterange",
+                                "format": "YYYY",
+                                "formatOptions": [
+                                    "YYYY",
+                                    "MM-YYYY",
+                                    "DD-MM-YYYY",
+                                    "DD-MM-YYYY HH:mm"
+                                ],
+                                "label": {
+                                    "en": "Data period",
+                                    "nl": "Dataperiode"
+                                },
+                                "name": "subject_date_time_range",
+                                "description": {
+                                    "en": "Start and end of a period the data covers",
+                                    "nl": "Begin en eind van een periode waar de data over gaat"
+                                },
+                                "required": true,
+                                "optionalEndDate": true,
+                                "fullWidth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "relations",
+                "title": {
+                    "en": "Relations",
+                    "nl": "Relaties"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Audience",
+                            "nl": "Publiek"
+                        },
+                        "name": "audience",
+                        "multiselect": true,
+                        "required": true,
+                        "description": {
+                            "en": "Specifies which research disciplines which may be interested in this dataset. Examples may be Humanities; Arts and Culture; History of Arts and Architecture",
+                            "nl": "Geeft aan welke onderzoeksdisciplines mogelijk geïnteresseerd zijn in deze dataset. Voorbeelden kunnen zijn: Geesteswetenschappen; Kunst en Cultuur; Geschiedenis van Kunst en Architectuur."
+                        },
+                        "options": "narcis"
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Collections",
+                            "nl": "Collecties"
+                        },
+                        "name": "collections",
+                        "multiselect": true,
+                        "required": true,
+                        "description": {
+                            "en": "Something here",
+                            "nl": "Iets hier"
+                        },
+                        "options": "dansCollections"
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Related to",
+                            "nl": "Gerelateerd aan"
+                        },
+                        "name": "relation",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Other datasets, publications, projects",
+                            "nl": "Andere datasets, publicaties, projecten"
+                        },
+                        "fields": [
+                            {
+                                "type": "autocomplete",
+                                "label": {
+                                    "en": "Type of relation",
+                                    "nl": "Type relatie"
+                                },
+                                "name": "relation_type",
+                                "description": {
+                                    "en": "The type of relation to this external item",
+                                    "nl": "Type relatie met dit externe item"
+                                },
+                                "noIndicator": true,
+                                "options": [
+                                    {
+                                        "label": "Conforms to",
+                                        "value": "conforms to"
+                                    },
+                                    {
+                                        "label": "Has Format",
+                                        "value": "has format"
+                                    },
+                                    {
+                                        "label": "Has part",
+                                        "value": "has part"
+                                    },
+                                    {
+                                        "label": "References",
+                                        "value": "references"
+                                    },
+                                    {
+                                        "label": "Replaces",
+                                        "value": "replaces"
+                                    },
+                                    {
+                                        "label": "Requires",
+                                        "value": "requires"
+                                    },
+                                    {
+                                        "label": "Has version",
+                                        "value": "has version"
+                                    },
+                                    {
+                                        "label": "Is format of",
+                                        "value": "is format of"
+                                    },
+                                    {
+                                        "label": "Is part of",
+                                        "value": "is part of"
+                                    },
+                                    {
+                                        "label": "Is referenced by",
+                                        "value": "is referenced by"
+                                    },
+                                    {
+                                        "label": "Is replaced by",
+                                        "value": "is replaced by"
+                                    },
+                                    {
+                                        "label": "Is required by",
+                                        "value": "is required by"
+                                    },
+                                    {
+                                        "label": "Is version of",
+                                        "value": "is version of"
+                                    }
+                                ],
+                                "toggleRequired": [
+                                    "relation_item",
+                                    "relation_reference"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Related item",
+                                    "nl": "Gerelateerd item"
+                                },
+                                "name": "relation_item",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Other datasets, publications, projects, or initiatives can be linked here by providing a description, a URL, and selecting a relation type.",
+                                    "nl": "Andere datasets, publicaties, projecten of initiatieven kunnen hier worden gelinkt door een beschrijving, een URL en een relatietype te verstrekken."
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Item reference",
+                                    "nl": "Item referentie"
+                                },
+                                "name": "relation_reference",
+                                "noIndicator": true,
+                                "placeholder": "https://...",
+                                "validation": "uri",
+                                "description": {
+                                    "en": "A web link or PID reference for this external item",
+                                    "nl": "Een weblink of PID referentie naar dit externe item"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "administrative",
+                "title": {
+                    "en": "Administrative",
+                    "nl": "Administratief"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Language of the data set",
+                            "nl": "Taal van de data"
+                        },
+                        "name": "language_data",
+                        "required": true,
+                        "description": {
+                            "en": "Provide the language of the data set",
+                            "nl": "Geef de taal op van de dataset"
+                        },
+                        "options": "languageList"
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Language of metadata",
+                            "nl": "Taal van metadata"
+                        },
+                        "name": "language_metadata",
+                        "required": true,
+                        "multiselect": true,
+                        "description": {
+                            "en": "Provide the language(s) of the metadata you've entered, e.g. the description and title",
+                            "nl": "Geef de taal of talen op van deze metadata, denk bijvoorbeeld aan titel en bescrijving"
+                        },
+                        "options": "languageList"
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Email address of dataset contact person",
+                            "nl": "Emailadres contacpersoon dataset"
+                        },
+                        "name": "contact_email",
+                        "required": true,
+                        "validation": "email",
+                        "autofill": "email",
+                        "description": {
+                            "en": "This is the e-mail address of the person who receives questions about this dataset, once it has been published.",
+                            "nl": "Dit is het e-mailadres van de persoon die vragen ontvangt over deze dataset, wanneer deze is gepubliceerd."
+                        }
+                    }
+                ]
+            }
+        ],
+        "formTitle": "title",
+        "displayName": {
+            "en": "DataverseNL",
+            "nl": "DataverseNL"
+        },
+        "description": {
+            "en": "Deposit data in the DataverseNL data station.",
+            "nl": "Deponeer data in het DataverseNL datastation."
+        },
+        "target": {
+            "envName": "dataversenl_demo",
+            "configName": "demo-dataverse.nl"
+        },
+        "targetCredentials": [
+            {
+                "name": "Dataverse",
+                "repo": "demo.dataverse.nl",
+                "auth": "API_KEY",
+                "authKey": "dataverse_nl_api_key",
+                "keyUrl": "https://demo.dataverse.nl/dataverseuser.xhtml?selectTab=apiTokenTab",
+                "keyCheckUrl": "https://demo.dataverse.nl/api/users/:me",
+                "helpText": {
+                    "en": "This app deposits your data to the DataverseNL data station. To be able to do this, you need to have a valid API key in the data station.",
+                    "nl": "Deze app slaat je data in het DataverseNL datastation. Om dit te kunnen doen, heb je een geldige API sleutel nodig in dit datastation."
+                }
+            }
+        ],
+        "filesUpload": {
+            "fileRoles": [
+                {
+                    "value": "audio_file",
+                    "label": "Audio file"
+                },
+                {
+                    "value": "code",
+                    "label": "Code"
+                },
+                {
+                    "value": "data_dictionary_code_book",
+                    "label": "Data dictionary - code book"
+                },
+                {
+                    "value": "data_dictionary_other",
+                    "label": "Data dictionary - other"
+                },
+                {
+                    "value": "data_file",
+                    "label": "Data file"
+                },
+                {
+                    "value": "dissemination_copy",
+                    "label": "Dissemination copy"
+                },
+                {
+                    "value": "image_file",
+                    "label": "Image file"
+                },
+                {
+                    "value": "interview_questions",
+                    "label": "Interview questions"
+                },
+                {
+                    "value": "methodology",
+                    "label": "Methodology"
+                },
+                {
+                    "value": "original_metadata",
+                    "label": "Original metadata"
+                },
+                {
+                    "value": "preservation_copy",
+                    "label": "Preservation copy"
+                },
+                {
+                    "value": "publication",
+                    "label": "Publication"
+                },
+                {
+                    "value": "report",
+                    "label": "Report"
+                },
+                {
+                    "value": "subtitles",
+                    "label": "Subtitles"
+                },
+                {
+                    "value": "supplementary_file",
+                    "label": "Supplementary file"
+                },
+                {
+                    "value": "thumbnail",
+                    "label": "Thumbnail"
+                },
+                {
+                    "value": "transcript",
+                    "label": "Transcript"
+                },
+                {
+                    "value": "type_registry_value",
+                    "label": "Type registry value"
+                },
+                {
+                    "value": "video_file",
+                    "label": "Video file"
+                }
+            ],
+            "embargoDate": true,
+            "embargoDateMin": 2,
+            "embargoDateMax": 18250,
+            "displayProcesses": false,
+            "maxSize": 9985798963
+        }
+    }
+}

@@ -1,0 +1,1265 @@
+{
+    "Data Station Social Sciences and Humanities | OH-SMART": {
+        "form": [
+            {
+                "id": "ohs",
+                "title": {
+                    "en": "Oral-history specific",
+                    "nl": "Specifiek voor mondelinge geschiedenis"
+                },
+                "fields": [
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Interviewee",
+                            "nl": "Geinterviewde"
+                        },
+                        "name": "interviewee",
+                        "description": {
+                            "en": "Information about the person being interviewed. This data will not be public.",
+                            "nl": "Informatie over de persoon die wordt geinterviewd. Deze data wordt niet gepubliceerd."
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "interviewee_first_name",
+                                "required": true,
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "interviewee_last_name",
+                                "required": true,
+                                "private": true
+                            },
+                            {
+                                "type": "check",
+                                "name": "interviewee_public",
+                                "description": {
+                                    "en": "First and last name of interviewee will be publically viewable if checked",
+                                    "nl": "Voor- en achternaam van de geinterviewde zijn publiek als dit is aangevinkt"
+                                },
+                                "options": [
+                                    {
+                                        "value": "interviewee_public_data",
+                                        "label": {
+                                            "en": "First and last name are public data",
+                                            "nl": "Voor- en achternaam zijn publiek"
+                                        }
+                                    }
+                                ],
+                                "togglePrivate": [
+                                    "interviewee_first_name",
+                                    "interviewee_last_name"
+                                ],
+                                "fullWidth": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Preferred name",
+                                    "nl": "Voorkeursnaam"
+                                },
+                                "name": "interviewee_preferred_name",
+                                "noIndicator": true,
+                                "private": true
+                            },
+                            {
+                                "type": "date",
+                                "format": "DD-MM-YYYY",
+                                "label": {
+                                    "en": "Date of birth",
+                                    "nl": "Geboortedatum"
+                                },
+                                "name": "interviewee_dob",
+                                "noIndicator": true,
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Function",
+                                    "nl": "Functie"
+                                },
+                                "name": "interviewee_function",
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "interviewee_affiliation",
+                                "private": true
+                            },
+                            {
+                                "type": "check",
+                                "name": "interviewee_consent",
+                                "description": {
+                                    "en": "Consent given for the processing of personal data (including archiving and, if applicable, making accessible for reuse, for instance through an informed consent form)",
+                                    "nl": "Toestemming gegeven voor de verwerking van persoonsgegevens (inclusief archivering en, indien van toepassing, toegankelijk maken voor hergebruik, bijvoorbeeld via een toestemmingsformulier)"
+                                },
+                                "required": true,
+                                "private": true,
+                                "options": [
+                                    {
+                                        "value": "interviewee_consent_signed",
+                                        "label": {
+                                            "en": "Consent given",
+                                            "nl": "Toestemming gegeven"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Interviewer",
+                            "nl": "Interviewer"
+                        },
+                        "name": "interviewer",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Information about the person(s) taking the interview. This data will not be public.",
+                            "nl": "Informatie over de persoon het interview afneemt. Deze data wordt niet gepubliceerd."
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "interviewer_first_name",
+                                "required": true,
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "interviewer_last_name",
+                                "required": true,
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Preferred name",
+                                    "nl": "Voorkeursnaam"
+                                },
+                                "name": "interviewer_preferred_name",
+                                "noIndicator": true,
+                                "private": true
+                            },
+                            {
+                                "type": "date",
+                                "format": "DD-MM-YYYY",
+                                "label": {
+                                    "en": "Date of birth",
+                                    "nl": "Geboortedatum"
+                                },
+                                "name": "interviewer_dob",
+                                "noIndicator": true,
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Function",
+                                    "nl": "Functie"
+                                },
+                                "name": "interviewer_function",
+                                "private": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "interviewer_affiliation",
+                                "private": true
+                            },
+                            {
+                                "type": "check",
+                                "name": "interviewer_consent",
+                                "description": {
+                                    "en": "Consent given for the processing of personal data (including archiving and, if applicable, making accessible for reuse, for instance through an informed consent form)",
+                                    "nl": "Toestemming gegeven voor de verwerking van persoonsgegevens (inclusief archivering en, indien van toepassing, toegankelijk maken voor hergebruik, bijvoorbeeld via een toestemmingsformulier)"
+                                },
+                                "required": true,
+                                "private": true,
+                                "options": [
+                                    {
+                                        "value": "interviewer_consent_signed",
+                                        "label": {
+                                            "en": "Consent given",
+                                            "nl": "Toestemming gegeven"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Interpreter",
+                            "nl": "Vertaler"
+                        },
+                        "name": "interpreter",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Information about the person(s) interpreting the interview. This data will not be public.",
+                            "nl": "Informatie over de persoon het interview heeft vertaald. Deze data wordt niet gepubliceerd."
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "interpreter_first_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "interpreter_consent",
+                                    "interpreter_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "interpreter_last_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "interpreter_consent",
+                                    "interpreter_first_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Function",
+                                    "nl": "Functie"
+                                },
+                                "name": "interpreter_function",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "interpreter_consent",
+                                    "interpreter_first_name",
+                                    "interpreter_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "interpreter_affiliation",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "interpreter_consent",
+                                    "interpreter_first_name",
+                                    "interpreter_last_name"
+                                ]
+                            },
+                            {
+                                "type": "check",
+                                "name": "interpreter_consent",
+                                "description": {
+                                    "en": "Consent given for the processing of personal data (including archiving and, if applicable, making accessible for reuse, for instance through an informed consent form)",
+                                    "nl": "Toestemming gegeven voor de verwerking van persoonsgegevens (inclusief archivering en, indien van toepassing, toegankelijk maken voor hergebruik, bijvoorbeeld via een toestemmingsformulier)"
+                                },
+                                "private": true,
+                                "noIndicator": true,
+                                "options": [
+                                    {
+                                        "value": "interpreter_consent_signed",
+                                        "label": {
+                                            "en": "Consent given",
+                                            "nl": "Toestemming gegeven"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Others present",
+                            "nl": "Andere aanwezigen"
+                        },
+                        "name": "others",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Information about other person(s) being present during the interview. This data will not be public.",
+                            "nl": "Informatie over andere aanwezigen bij het interview. Deze data wordt niet gepubliceerd."
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "others_first_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "others_consent",
+                                    "others_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "others_last_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "others_consent",
+                                    "others_first_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Function",
+                                    "nl": "Functie"
+                                },
+                                "name": "others_function",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "others_consent",
+                                    "others_first_name",
+                                    "others_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "others_affiliation",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "others_consent",
+                                    "others_first_name",
+                                    "others_last_name"
+                                ]
+                            },
+                            {
+                                "type": "check",
+                                "name": "others_consent",
+                                "description": {
+                                    "en": "Consent given for the processing of personal data (including archiving and, if applicable, making accessible for reuse, for instance through an informed consent form)",
+                                    "nl": "Toestemming gegeven voor de verwerking van persoonsgegevens (inclusief archivering en, indien van toepassing, toegankelijk maken voor hergebruik, bijvoorbeeld via een toestemmingsformulier)"
+                                },
+                                "private": true,
+                                "noIndicator": true,
+                                "options": [
+                                    {
+                                        "value": "others_consent_signed",
+                                        "label": {
+                                            "en": "Consent given",
+                                            "nl": "Toestemming gegeven"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Location of interview",
+                            "nl": "Locatie van interview"
+                        },
+                        "name": "interview_location",
+                        "required": true,
+                        "multiselect": true,
+                        "allowFreeText": true,
+                        "description": {
+                            "en": "Location where interview was conducted",
+                            "nl": "Plek waar het interview is afgenomen"
+                        },
+                        "options": "geonames"
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Date and time",
+                            "nl": "Datum en tijd"
+                        },
+                        "name": "interview_date_time",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Date and time of interview",
+                            "nl": "Datum en tijd waarop het interview is afgenomen"
+                        },
+                        "fields": [
+                            {
+                                "type": "daterange",
+                                "format": "DD-MM-YYYY",
+                                "formatOptions": [
+                                    "DD-MM-YYYY",
+                                    "DD-MM-YYYY HH:mm"
+                                ],
+                                "label": {
+                                    "en": "Time and date",
+                                    "nl": "Tijd en datum"
+                                },
+                                "name": "interview_date_time_range",
+                                "required": true,
+                                "optionalEndDate": true,
+                                "fullWidth": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Recording by",
+                            "nl": "Opgenomen door"
+                        },
+                        "name": "recorded_by",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Information about the person assisting with recording",
+                            "nl": "Informatie over de persoon die het interview heeft opgenomen"
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "recorded_by_first_name",
+                                "noIndicator": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "recorded_by_last_name",
+                                "noIndicator": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "recorded_by_affiliation",
+                                "noIndicator": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Recording format",
+                            "nl": "Opnameformaat"
+                        },
+                        "name": "recording_format",
+                        "multiselect": true,
+                        "description": {
+                            "en": "MIME type and other type information",
+                            "nl": "MIME type en andere type-informatie"
+                        },
+                        "options": "dansFormats",
+                        "noIndicator": true
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Recording equipment",
+                            "nl": "Opnameapparatuur"
+                        },
+                        "name": "recording_equipment",
+                        "noIndicator": true,
+                        "description": {
+                            "en": "Equipment, method, or platform used for recording",
+                            "nl": "Apparatuur/methode gebruikt voor de opname"
+                        }
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Transcriber",
+                            "nl": "Transcribent"
+                        },
+                        "name": "transcript_human",
+                        "repeatable": true,
+                        "description": {
+                            "en": "In case of transcript by human. This data will not be public.",
+                            "nl": "Wanneer de transcriptie door een persoon is gedaan. Deze data wordt niet gepubliceerd."
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "First name",
+                                    "nl": "Voornaam"
+                                },
+                                "name": "transcript_human_first_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "transcript_human_consent",
+                                    "transcript_human_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Last name",
+                                    "nl": "Achternaam"
+                                },
+                                "name": "transcript_human_last_name",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "transcript_human_consent",
+                                    "transcript_human_first_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Function",
+                                    "nl": "Functie"
+                                },
+                                "name": "transcript_human_function",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "transcript_human_consent",
+                                    "transcript_human_first_name",
+                                    "transcript_human_last_name"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "transcript_human_affiliation",
+                                "private": true,
+                                "noIndicator": true,
+                                "toggleRequired": [
+                                    "transcript_human_consent",
+                                    "transcript_human_first_name",
+                                    "transcript_human_last_name"
+                                ]
+                            },
+                            {
+                                "type": "check",
+                                "name": "transcript_human_consent",
+                                "description": {
+                                    "en": "Consent given for the processing of personal data (including archiving and, if applicable, making accessible for reuse, for instance through an informed consent form)",
+                                    "nl": "Toestemming gegeven voor de verwerking van persoonsgegevens (inclusief archivering en, indien van toepassing, toegankelijk maken voor hergebruik, bijvoorbeeld via een toestemmingsformulier)"
+                                },
+                                "private": true,
+                                "noIndicator": true,
+                                "options": [
+                                    {
+                                        "value": "transcript_human_consent_signed",
+                                        "label": {
+                                            "en": "Consent given",
+                                            "nl": "Toestemming gegeven"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Transcript by machine",
+                            "nl": "Machinetranscriptie"
+                        },
+                        "name": "transcript_machine",
+                        "noIndicator": true
+                    }
+                ]
+            },
+            {
+                "id": "citation",
+                "title": {
+                    "en": "Citation",
+                    "nl": "Citaten"
+                },
+                "fields": [
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Title",
+                            "nl": "Titel"
+                        },
+                        "name": "title",
+                        "required": true,
+                        "description": {
+                            "en": "A descriptive title for the work, to be used in citations",
+                            "nl": "Een beschrijvende titel voor deze data, wordt gebruikt in referenties."
+                        },
+                        "autoGenerateValue": {
+                            "en": "Interview with {{interviewee_first_name}} {{interviewee_last_name}} in {{interview_location}} on {{interview_date_time_range}}",
+                            "nl": "Interview met {{interviewee_first_name}} {{interviewee_last_name}} in {{interview_location}} op {{interview_date_time_range}}"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Subtitle",
+                            "nl": "Ondertitel"
+                        },
+                        "name": "subtitle",
+                        "noIndicator": true,
+                        "description": {
+                            "en": "You can provide a subtitle if you wish",
+                            "nl": "Je kunt een optionele ondertitel opgeven als je wilt"
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Description",
+                            "nl": "Beschrijving"
+                        },
+                        "name": "description",
+                        "multiline": true,
+                        "required": true,
+                        "description": {
+                            "en": "Some context on the interview. What is the role and relevance of the interviewee in the project? What led to the interview being conducted? Summary of what was discussed in the interview, with time breakdown, and describe important events in the interview. Improves discoverability and reusability of the interview data. Briefly describe the setting and atmosphere of the interview to indicate what does not emerge when only the text is read. Basic HTML tags are allowed.",
+                            "nl": "Wat context bij het interview. Wat is de rol en relevantie van de geinterviewde bij dit project? Waarom is dit interview afgenomen? Samenvatting van wat er besproken is in het interview, met een tijdindicatie. Beschrijf belangrijke gebeurtenissen in hter interview. Verbetert zichtbaarheid en herbruikbaarheid van de data. Beschrijf kort de setting en sfeer van het interview om meer dan alleen de tekst die gelezen wordt duidelijk te maken. Simpele HTML tags zijn toegestaan."
+                        }
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Publisher",
+                            "nl": "Uitgever"
+                        },
+                        "name": "publisher",
+                        "required": true,
+                        "description": {
+                            "en": "Institution - often the rights holder",
+                            "nl": "Instituut - vaak de rechthebbende"
+                        },
+                        "options": "ror",
+                        "allowFreeText": true
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Author",
+                            "nl": "Auteur"
+                        },
+                        "name": "author",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Add one or more authors.",
+                            "nl": "Voeg een of meerdere auteurs toe"
+                        },
+                        "fields": [
+                            {
+                                "type": "autocomplete",
+                                "label": {
+                                    "en": "Name",
+                                    "nl": "Naam"
+                                },
+                                "name": "name",
+                                "required": true,
+                                "description": {
+                                    "en": "First and last name",
+                                    "nl": "Voor en achternaam"
+                                },
+                                "options": "orcid",
+                                "allowFreeText": true
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Affiliation",
+                                    "nl": "Affiliatie"
+                                },
+                                "name": "affiliation",
+                                "required": true,
+                                "description": {
+                                    "en": "",
+                                    "nl": ""
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Grant information",
+                            "nl": "Beursinformatie"
+                        },
+                        "name": "grant",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Optional information if a grant was involved in financing the project",
+                            "nl": "Optionele informatie als het project met behulp van subsidie tot stand is gekomen"
+                        },
+                        "fields": [
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Grant agency",
+                                    "nl": "Subsidieverstrekker"
+                                },
+                                "name": "grant_agency",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Information about the agency providing a grant",
+                                    "nl": "Informatie over de verstrekker van de beurs of subsidie"
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Grant number/identifier",
+                                    "nl": "Dossiernummer van de verstrekte subsidie"
+                                },
+                                "name": "grant_number",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Information about the grant number or identifier",
+                                    "nl": "Informatie over het dossiernummer van de beurs of subsidie"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "coverage",
+                "title": {
+                    "en": "Coverage",
+                    "nl": "Dekking"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Subject keywords",
+                            "nl": "Trefwoorden bij onderwerp"
+                        },
+                        "name": "subject_keywords",
+                        "required": true,
+                        "multiselect": true,
+                        "description": {
+                            "en": "Enter keywords that describe the content of your dataset in terms of artistic or architectural subject matter. Keywords may either be selected from the Getty Art & Architecture Thesaurus (AAT), or entered as free text. These keywords have a different scope from the 'Humanities' domain-specific keywords (below), which should be selected from the European Languages Social Sciences Thesaurus (ELSST), and which describe the content of your dataset in terms of social relations, interactions or phenomena, or ways to study them.",
+                            "nl": "Voer trefwoorden in die de inhoud van de dataset beschrijven op het gebied van artistieke of architectonische onderwerpen. Trefwoorden kunnen worden geselecteerd uit de Getty Art & Architecture Thesaurus (AAT) of worden ingevoerd als vrije tekst. Deze trefwoorden hebben een andere reikwijdte dan de 'Geesteswetenschappen' domeinspecifieke trefwoorden (hieronder), die moeten worden geselecteerd uit de European Languages Social Sciences Thesaurus (ELSST) en die de inhoud van uw dataset beschrijven in termen van sociale relaties, interacties of verschijnselen, of manieren om ze te bestuderen."
+                        },
+                        "options": "getty",
+                        "allowFreeText": true,
+                        "value": [
+                            {
+                                "label": "oral history (discipline)",
+                                "value": "http://vocab.getty.edu/page/aat/300054402",
+                                "mandatory": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Location(s) covered in the interview",
+                            "nl": "Locatie(s) besproken in het interview"
+                        },
+                        "name": "subject_location",
+                        "multiselect": true,
+                        "description": {
+                            "en": "The location(s) that the interview material deals with",
+                            "nl": "De locatie(s) waar het interview over gaat"
+                        },
+                        "options": "geonames"
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Period covered in the interview",
+                            "nl": "Periode besproken in het interview"
+                        },
+                        "name": "subject_date_time",
+                        "repeatable": true,
+                        "description": {
+                            "en": "The dates and times the interview material deals with",
+                            "nl": "De data en tijden waarover het interview gaat"
+                        },
+                        "fields": [
+                            {
+                                "type": "daterange",
+                                "format": "YYYY",
+                                "formatOptions": [
+                                    "YYYY",
+                                    "MM-YYYY",
+                                    "DD-MM-YYYY",
+                                    "DD-MM-YYYY HH:mm"
+                                ],
+                                "label": {
+                                    "en": "Interview period",
+                                    "nl": "Interviewperiode"
+                                },
+                                "name": "subject_date_time_range",
+                                "description": {
+                                    "en": "Start and end of a period the interview covers",
+                                    "nl": "Begin en eind van een periode waar het interview over gaat"
+                                },
+                                "required": true,
+                                "optionalEndDate": true,
+                                "fullWidth": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "relations",
+                "title": {
+                    "en": "Relations",
+                    "nl": "Relaties"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Audience",
+                            "nl": "Publiek"
+                        },
+                        "name": "audience",
+                        "multiselect": true,
+                        "required": true,
+                        "description": {
+                            "en": "Specifies which research disciplines which may be interested in this dataset. Examples may be Humanities; Arts and Culture; History of Arts and Architecture",
+                            "nl": "Geeft aan welke onderzoeksdisciplines mogelijk geïnteresseerd zijn in deze dataset. Voorbeelden kunnen zijn: Geesteswetenschappen; Kunst en Cultuur; Geschiedenis van Kunst en Architectuur."
+                        },
+                        "options": "narcis"
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Collections",
+                            "nl": "Collecties"
+                        },
+                        "name": "collections",
+                        "multiselect": true,
+                        "required": true,
+                        "description": {
+                            "en": "Something here",
+                            "nl": "Iets hier"
+                        },
+                        "options": "dansCollections",
+                        "value": [
+                            {
+                                "mandatory": true,
+                                "label": "Oral History",
+                                "value": "https://vocabularies.dans.knaw.nl/collections/ssh/cfa04ed6-4cd0-4651-80cb-ed4ca8fa14f3",
+                                "id": "ssh/cfa04ed6-4cd0-4651-80cb-ed4ca8fa14f3"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "label": {
+                            "en": "Related to",
+                            "nl": "Gerelateerd aan"
+                        },
+                        "name": "relation",
+                        "repeatable": true,
+                        "description": {
+                            "en": "Other interviews, publications, projects",
+                            "nl": "Andere interviews, publicaties, projecten"
+                        },
+                        "fields": [
+                            {
+                                "type": "autocomplete",
+                                "label": {
+                                    "en": "Type of relation",
+                                    "nl": "Type relatie"
+                                },
+                                "name": "relation_type",
+                                "description": {
+                                    "en": "The type of relation to this external item",
+                                    "nl": "Type relatie met dit externe item"
+                                },
+                                "noIndicator": true,
+                                "options": [
+                                    {
+                                        "label": "Conforms to",
+                                        "value": "conforms to"
+                                    },
+                                    {
+                                        "label": "Has Format",
+                                        "value": "has format"
+                                    },
+                                    {
+                                        "label": "Has part",
+                                        "value": "has part"
+                                    },
+                                    {
+                                        "label": "References",
+                                        "value": "references"
+                                    },
+                                    {
+                                        "label": "Replaces",
+                                        "value": "replaces"
+                                    },
+                                    {
+                                        "label": "Requires",
+                                        "value": "requires"
+                                    },
+                                    {
+                                        "label": "Has version",
+                                        "value": "has version"
+                                    },
+                                    {
+                                        "label": "Is format of",
+                                        "value": "is format of"
+                                    },
+                                    {
+                                        "label": "Is part of",
+                                        "value": "is part of"
+                                    },
+                                    {
+                                        "label": "Is referenced by",
+                                        "value": "is referenced by"
+                                    },
+                                    {
+                                        "label": "Is replaced by",
+                                        "value": "is replaced by"
+                                    },
+                                    {
+                                        "label": "Is required by",
+                                        "value": "is required by"
+                                    },
+                                    {
+                                        "label": "Is version of",
+                                        "value": "is version of"
+                                    }
+                                ],
+                                "toggleRequired": [
+                                    "relation_item",
+                                    "relation_reference"
+                                ]
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Related item",
+                                    "nl": "Gerelateerd item"
+                                },
+                                "name": "relation_item",
+                                "noIndicator": true,
+                                "description": {
+                                    "en": "Other interviews, publications, projects, or initiatives can be linked here by providing a description, a URL, and selecting a relation type.",
+                                    "nl": "Andere interviews, publicaties, projecten of initiatieven kunnen hier worden gelinkt door een beschrijving, een URL en een relatietype te verstrekken."
+                                }
+                            },
+                            {
+                                "type": "text",
+                                "label": {
+                                    "en": "Item reference",
+                                    "nl": "Item referentie"
+                                },
+                                "name": "relation_reference",
+                                "noIndicator": true,
+                                "placeholder": "https://...",
+                                "validation": "uri",
+                                "description": {
+                                    "en": "A web link or PID reference for this external item",
+                                    "nl": "Een weblink of PID referentie naar dit externe item"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "administrative",
+                "title": {
+                    "en": "Administrative",
+                    "nl": "Administratief"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Language of interview",
+                            "nl": "Taal van interview"
+                        },
+                        "name": "language_interview",
+                        "required": true,
+                        "description": {
+                            "en": "Provide the language the interview was held in",
+                            "nl": "Geef de taal waarin het interview is gehouden op"
+                        },
+                        "options": "languageList"
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Language of metadata",
+                            "nl": "Taal van metadata"
+                        },
+                        "name": "language_metadata",
+                        "required": true,
+                        "multiselect": true,
+                        "description": {
+                            "en": "Provide the language(s) of the metadata you've entered, e.g. the description and title",
+                            "nl": "Geef de taal of talen op van deze metadata, denk bijvoorbeeld aan titel en bescrijving"
+                        },
+                        "options": "languageList"
+                    },
+                    {
+                        "type": "text",
+                        "label": {
+                            "en": "Email address of dataset contact person",
+                            "nl": "Emailadres contacpersoon dataset"
+                        },
+                        "name": "contact_email",
+                        "required": true,
+                        "validation": "email",
+                        "autofill": "email",
+                        "description": {
+                            "en": "This is the e-mail address of the person who receives questions about this dataset, once it has been published.",
+                            "nl": "Dit is het e-mailadres van de persoon die vragen ontvangt over deze dataset, wanneer deze is gepubliceerd."
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "rights",
+                "title": {
+                    "en": "Rights, licencing and re-use",
+                    "nl": "Rechten, licenties en hergebruik"
+                },
+                "fields": [
+                    {
+                        "type": "autocomplete",
+                        "allowFreeText": true,
+                        "label": {
+                            "en": "Rights holder",
+                            "nl": "Rechthebbende"
+                        },
+                        "name": "rightsholder",
+                        "required": true,
+                        "description": {
+                            "en": "State the organisation or individual that is holder of the intellectual property rights. For datasets, these rights are usually vested in the organisation thet employs the data creator(s). Note that the depositor (account used to deposit the data and metadata will be contacted for access requests, and must have the consent of the rights holder to publish the data.",
+                            "nl": "Vermeld de organisatie of individu die de intellectuele eigendomsrechten bezit. Voor datasets liggen deze rechten meestal bij de organisatie die de maker(s) van de data in dienst heeft. Let op: de deposant (het account dat wordt gebruikt om de data en metadata te deponeren) wordt gecontacteerd voor toegangsverzoeken en moet de toestemming van de rechthebbende hebben om de data te publiceren."
+                        },
+                        "multiApiValue": "ror",
+                        "options": [
+                            "ror",
+                            "orcid"
+                        ]
+                    },
+                    {
+                        "type": "autocomplete",
+                        "label": {
+                            "en": "Licence",
+                            "nl": "Licentie"
+                        },
+                        "name": "licence_type",
+                        "required": true,
+                        "description": {
+                            "en": "One of a number of specific licences",
+                            "nl": "Eén van de volgende specifieke licenties"
+                        },
+                        "options": "sshLicences",
+                        "value": {
+                            "label": "DANS Licence",
+                            "value": "https://doi.org/10.17026/fp39-0x58"
+                        }
+                    },
+                    {
+                        "type": "radio",
+                        "label": {
+                            "en": "Does this submission contain personal data?",
+                            "nl": "Bevat deze dataset persoonlijke gegevens?"
+                        },
+                        "name": "personal_data",
+                        "required": true,
+                        "layout": "row",
+                        "value": "personal_data_true",
+                        "options": [
+                            {
+                                "value": "personal_data_true",
+                                "label": {
+                                    "en": "Yes",
+                                    "nl": "Ja"
+                                }
+                            },
+                            {
+                                "value": "personal_data_false",
+                                "label": {
+                                    "en": "No",
+                                    "nl": "Nee"
+                                }
+                            },
+                            {
+                                "value": "personal_data_unknown",
+                                "label": {
+                                    "en": "Unknown",
+                                    "nl": "Onbekend"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "formTitle": "title",
+        "displayName": {
+            "en": "OH-SMArt",
+            "nl": "OH-SMArt"
+        },
+        "description": {
+            "en": "Deposit audiovisual data for the 'Oral History - stories at the museum around artworks' project in the DANS Social Sciences and Humanities data station.",
+            "nl": "Deponeer audiovisuele data voor het 'Oral History - stories at the museum around artworks' project in het DANS Social Sciences and Humanities datastation."
+        },
+        "target": {
+            "envName": "ohsmart_demo",
+            "configName": "new-demo.ssh.datastations.nl"
+        },
+        "targetCredentials": [
+            {
+                "name": "Dataverse",
+                "repo": "demo.ssh.datastations.nl",
+                "auth": "API_KEY",
+                "authKey": "dataverse_api_key",
+                "keyUrl": "https://demo.ssh.datastations.nl/dataverseuser.xhtml?selectTab=apiTokenTab",
+                "keyCheckUrl": "https://demo.ssh.datastations.nl/api/users/:me",
+                "helpText": {
+                    "en": "The OH-SMArt app deposits your data to the DANS Social Sciences and Humanities data station. To be able to do this, you need to have a valid API key in the data station.",
+                    "nl": "De OH-SMArt app slaat je data in het DANS Social Sciences and Humanities datastation. Om dit te kunnen doen, heb je een geldige API sleutel nodig in dit datastation."
+                }
+            }
+        ],
+        "filesUpload": {
+            "fileRoles": [
+                {
+                    "value": "audio_file",
+                    "label": "Audio file"
+                },
+                {
+                    "value": "code",
+                    "label": "Code"
+                },
+                {
+                    "value": "data_dictionary_code_book",
+                    "label": "Data dictionary - code book"
+                },
+                {
+                    "value": "data_dictionary_other",
+                    "label": "Data dictionary - other"
+                },
+                {
+                    "value": "data_file",
+                    "label": "Data file"
+                },
+                {
+                    "value": "dissemination_copy",
+                    "label": "Dissemination copy"
+                },
+                {
+                    "value": "image_file",
+                    "label": "Image file"
+                },
+                {
+                    "value": "interview_questions",
+                    "label": "Interview questions"
+                },
+                {
+                    "value": "methodology",
+                    "label": "Methodology"
+                },
+                {
+                    "value": "original_metadata",
+                    "label": "Original metadata"
+                },
+                {
+                    "value": "preservation_copy",
+                    "label": "Preservation copy"
+                },
+                {
+                    "value": "publication",
+                    "label": "Publication"
+                },
+                {
+                    "value": "report",
+                    "label": "Report"
+                },
+                {
+                    "value": "subtitles",
+                    "label": "Subtitles"
+                },
+                {
+                    "value": "supplementary_file",
+                    "label": "Supplementary file"
+                },
+                {
+                    "value": "thumbnail",
+                    "label": "Thumbnail"
+                },
+                {
+                    "value": "transcript",
+                    "label": "Transcript"
+                },
+                {
+                    "value": "type_registry_value",
+                    "label": "Type registry value"
+                },
+                {
+                    "value": "video_file",
+                    "label": "Video file"
+                }
+            ],
+            "embargoDate": true,
+            "embargoDateMin": 2,
+            "embargoDateMax": 18250,
+            "displayProcesses": false,
+            "maxSize": 9985798963
+        }
+    }
+}
