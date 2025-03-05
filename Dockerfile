@@ -37,8 +37,8 @@ COPY uv.lock .
 RUN uv venv .venv
 # Install dependencies
 
-RUN uv sync --frozen --no-cache
-
+RUN uv sync --frozen --no-cache && chown -R akmi:akmi ${BASE_DIR}
+USER akmi
 # Run the application.
 CMD ["python", "-m", "src.main"]
 
