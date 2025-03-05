@@ -65,23 +65,25 @@ app = FastAPI(title= project_details['title'], description = project_details['de
 
 LOG_FILE = settings.LOG_FILE
 log_config = uvicorn.config.LOGGING_CONFIG
+logging.basicConfig(filename=settings.LOG_FILE, level=settings.LOG_LEVEL,
+                        format=settings.LOG_FORMAT)
 
 if settings.otlp_enable is False:
-    logging.basicConfig(filename=settings.LOG_FILE, level=settings.LOG_LEVEL,
-                        format=settings.LOG_FORMAT)
+    logging.info("Logging configured without OTLP")
 else:
+    logging.info("OTLP enabled")
     a_commons.set_otlp(app, APP_NAME, OTLP_GRPC_ENDPOINT, LOG_FILE, log_config)
 
 
 @app.exception_handler(StarletteHTTPException)
 async def custom_404_handler(request: Request, exc: StarletteHTTPException):
     if exc.status_code == 404:
-        logging.error(f"404 Not Found: {request.url}")
+        logging.debug(f"404 Not Found: {request.url}")
         return JSONResponse(
             status_code=404,
             content={"message": "Endpoint not found"}
         )
-    logging.error(f"HTTP Exception: {exc.status_code} - {exc.detail}")
+    logging.debug(f"HTTP Exception: {exc.status_code} - {exc.detail}")
     return JSONResponse(
         status_code=exc.status_code,
         content={"message": exc.detail}
@@ -112,5 +114,6 @@ app.include_router(
 
 
 if __name__ == "__main__":
-    logging.info("RAS: Starting the app __main__")
+    print("hello")
+    logging.info(f"RAS: Starting the app __main__ with OTLP: {settings.otlp_enable}")
     uvicorn.run(app, host="0.0.0.0", port=EXPOSE_PORT, log_config=log_config)
