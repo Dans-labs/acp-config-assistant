@@ -78,12 +78,10 @@ else:
 @app.exception_handler(StarletteHTTPException)
 async def custom_404_handler(request: Request, exc: StarletteHTTPException):
     if exc.status_code == 404:
-        logging.debug(f"404 Not Found: {request.url}")
         return JSONResponse(
             status_code=404,
             content={"message": "Endpoint not found"}
         )
-    logging.debug(f"HTTP Exception: {exc.status_code} - {exc.detail}")
     return JSONResponse(
         status_code=exc.status_code,
         content={"message": exc.detail}
@@ -114,6 +112,5 @@ app.include_router(
 
 
 if __name__ == "__main__":
-    print("hello")
     logging.info(f"RAS: Starting the app __main__ with OTLP: {settings.otlp_enable}")
     uvicorn.run(app, host="0.0.0.0", port=EXPOSE_PORT, log_config=log_config)
