@@ -23,10 +23,10 @@ from src.aca import protected, public
 from src.aca.commons import data, settings, installed_repos_configs, project_details
 from akmi_utils import commons as a_commons
 
-api_keys = [settings.DANS_REPO_ASSISTANT_SERVICE_API_KEY]
+api_keys = [settings.ACP_CONFIG_ASSISTANT_SERVICE_API_KEY]
 security = HTTPBearer()
 
-APP_NAME = os.environ.get("APP_NAME", "Repository Assistant Service")
+APP_NAME = os.environ.get("APP_NAME", "ACP Config Assistant Service")
 EXPOSE_PORT = os.environ.get("EXPOSE_PORT", 2810)
 OTLP_GRPC_ENDPOINT = os.environ.get("OTLP_GRPC_ENDPOINT", "http://localhost:4317")
 
