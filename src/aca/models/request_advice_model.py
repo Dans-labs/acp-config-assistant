@@ -16,6 +16,7 @@ class DepositType(StrEnum):
     - REPORT: Represents a report deposit.
     - PUBLICATION: Represents a publication deposit.
     """
+
     DATASET = auto()
     CODE = auto()
     REPORT = auto()
@@ -32,7 +33,8 @@ class RepositoryAdviceModel(BaseModel):
     - deposit_type (DepositType): The type of deposit, with an alias 'deposit-type'.
     - file_type (Optional[str]): The type of file, with an alias 'file-type'. Defaults to None.
     """
+
     affiliation: HttpUrl
     domain: HttpUrl
-    deposit_type: DepositType = Field(..., alias='deposit-type')
-    file_type: Optional[str] = Field(None, alias='file-type')
+    deposit_type: DepositType = Field(..., alias="deposit-type")
+    file_type: Optional[str] = Field(None, alias="file-type")

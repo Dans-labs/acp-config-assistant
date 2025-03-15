@@ -17,7 +17,7 @@
                 "specification": [],
                 "transformed-metadata": [
                     {
-                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-DV-metadata-v4.xsl",
+                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-DV-metadata-v5.xsl",
                         "name": "dataset-metadata.json",
                         "dir": "metadata"
                     },
@@ -34,24 +34,24 @@
                     },
                     {
                         "name": "__generated__form-metadata-private.json",
-                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-json-private-v2.xsl",
+                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-json-private-v3.xsl",
                         "generate-file": true,
                         "restricted": true
                     },
                     {
                         "name": "Oral History metadata private.txt",
-                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-text-private-v2.xsl",
+                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-text-private-v3.xsl",
                         "generate-file": true,
                         "restricted": true
                     },
                     {
                         "name": "__generated__form-metadata-public.json",
-                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-json-public-v2.xsl",
+                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-json-public-v3.xsl",
                         "generate-file": true,
                         "restricted": false
                     },
                     {
-                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-text-public-v2.xsl",
+                        "transformer-url": "http://localhost:1745/transform/ohsmart-form-metadata-to-text-public-v3.xsl",
                         "name": "Oral History metadata public.txt",
                         "generate-file": true,
                         "restricted": false
