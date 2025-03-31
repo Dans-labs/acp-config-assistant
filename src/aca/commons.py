@@ -24,6 +24,7 @@ project_details = a_commons.get_project_details(
 
 def installed_repos_configs():
     logging.debug("startup")
+    app_names = []
 
     for repo_conf_filename in os.listdir(app_settings.repositories_conf_dir):
         if repo_conf_filename.endswith(".json"):
@@ -36,6 +37,7 @@ def installed_repos_configs():
                     repo_assistant = ras.RepoAssistantDataModel.model_validate(
                         saved_repo_assistant
                     )
+                    app_names.append(repo_assistant.app_name)
                     if repo_assistant.assistant_config_name in data:
                         logging.warning(
                             f"Configuration {repo_assistant.assistant_config_name} already exists and will be overwritten."
@@ -52,3 +54,6 @@ def installed_repos_configs():
                         f">>> Error validating: {repo_conf_filename}, caused by {e}"
                     )
                     continue
+
+    data.update({"app_names": app_names})
+    logging.info(f"Available apps : {sorted(app_names)}")

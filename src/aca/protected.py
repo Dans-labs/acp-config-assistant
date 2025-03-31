@@ -219,3 +219,8 @@ def delete_repository(name: str):
                 os.remove(repo_conf_json)
                 data.pop(name)
                 return {"deleted": name}
+
+@router.get("/list-apps")
+def list_apps():
+    app_names = data.get("app_names")
+    return sorted(app_names)
