@@ -2,11 +2,12 @@ import json
 import logging
 import os
 
-import tomli
+import requests
 from akmi_utils.models import ras
 from akmi_utils import commons as a_commons
 from dynaconf import Dynaconf
 from pydantic import ValidationError
+from urllib.parse import urlparse, urlunparse, urlencode
 
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["BASE_DIR"] = os.getenv("BASE_DIR", base_dir)
@@ -27,33 +28,58 @@ def installed_repos_configs():
     app_names = []
 
     for repo_conf_filename in os.listdir(app_settings.repositories_conf_dir):
-        if repo_conf_filename.endswith(".json"):
-            with open(
-                os.path.join(app_settings.repositories_conf_dir, repo_conf_filename)
-            ) as f:
-                try:
-                    logging.info(f"repo_conf_filename: {repo_conf_filename}")
-                    saved_repo_assistant = json.loads(f.read())
-                    repo_assistant = ras.RepoAssistantDataModel.model_validate(
-                        saved_repo_assistant
-                    )
-                    app_names.append(repo_assistant.app_name)
-                    if repo_assistant.assistant_config_name in data:
-                        logging.warning(
-                            f"Configuration {repo_assistant.assistant_config_name} already exists and will be overwritten."
-                        )
-                    data.update({repo_assistant.assistant_config_name: repo_assistant})
-                    logging.info(
-                        f"Loaded valid: {repo_assistant.assistant_config_name} in {repo_conf_filename}"
-                    )
-                except json.JSONDecodeError as e:
-                    logging.error(f"Error loading {repo_conf_filename}: {e}")
-                    continue
-                except ValidationError as e:
-                    logging.error(
-                        f">>> Error validating: {repo_conf_filename}, caused by {e}"
-                    )
-                    continue
+        if not repo_conf_filename.endswith(".json"):
+            continue
 
-    data.update({"app_names": app_names})
-    logging.info(f"Available apps : {sorted(app_names)}")
+        file_path = os.path.join(app_settings.repositories_conf_dir, repo_conf_filename)
+        print(f'Processing file: {file_path}')
+        logging.info(f"Processing file: {file_path}")
+        try:
+            with open(file_path) as f:
+                saved_repo_assistant = json.load(f)
+
+            repo_assistant = ras.RepoAssistantDataModel.model_validate(saved_repo_assistant)
+            if not repo_assistant:
+                logging.error(f"Invalid configuration in {repo_conf_filename}")
+                continue
+
+            can_be_added = any(
+                requests.get(convert_transformer_url(transformer.transformer_url)).status_code == 200
+                and requests.get(convert_transformer_url(transformer.transformer_url)).json()
+                for target_repo in repo_assistant.targets
+                if target_repo.metadata
+                for transformer in (target_repo.metadata.transformed_metadata or [])
+            )
+
+            if can_be_added:
+                app_names.append(repo_assistant.app_name)
+                if repo_assistant.assistant_config_name in data:
+                    logging.warning(
+                        f"{repo_conf_filename} - Duplicate configuration: {repo_assistant.assistant_config_name}. Overwriting."
+                    )
+                data[repo_assistant.assistant_config_name] = repo_assistant
+                logging.info(f"Loaded configuration: {repo_assistant.assistant_config_name} from {repo_conf_filename}")
+            else:
+                logging.error(f"Invalid configuration in {repo_conf_filename}: No valid transformer URLs found.")
+        except (json.JSONDecodeError, ValidationError) as e:
+            logging.error(f"Error processing {repo_conf_filename}: {e}")
+            continue
+
+    data["app_names"] = app_names
+    logging.info(f"Available apps: {sorted(app_names)}")
+
+
+def convert_transformer_url(original_url):
+    """
+    Converts a transformer URL to the saved XSL list format.
+
+    Args:
+        original_url (str): The original transformer URL.
+
+    Returns:
+        str: The converted URL in the saved XSL list format.
+    """
+    parsed_url = urlparse(original_url)
+    xslt_name = parsed_url.path.rsplit("/", 1)[-1]  # Extract the last part of the path
+    new_query = urlencode({"xslt_name": xslt_name})
+    return urlunparse(parsed_url._replace(path="/saved-xsl-list", query=new_query))

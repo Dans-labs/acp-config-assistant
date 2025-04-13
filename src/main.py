@@ -66,6 +66,7 @@ def auth_header(
 async def lifespan(application: FastAPI):
     logging.info("start up")
     installed_repos_configs()
+    print(f"Available repositories configurations: {sorted(list(data.keys()))}")
     logging.info(f"Available repositories configurations: {sorted(list(data.keys()))}")
     logging.info(emoji.emojize(":thumbs_up:"))
     with open(app_settings.repo_file_types) as file:
