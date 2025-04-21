@@ -1,6 +1,6 @@
 [project]
 name = "acp-config-assistant"
-version = "0.1.0"
+version = "0.1.6-dev"
 description = "Recommend repository or repositories based on deposit attributes<br/>Recommend metadata schema and profile based on repository, format and domain"
 authors = [{name = "Eko Indarto", email = "eko.indarto@dans.knaw.nl"}]
 readme = "README.md"
