@@ -36,11 +36,10 @@ def auth_header(
     auth_cred: Annotated[HTTPAuthorizationCredentials, Depends(security)],
 ):
     if not auth_cred or auth_cred.credentials not in api_keys:
-        keycloak_env = app_settings.get(
-            f"keycloak_{request.headers.get('auth-env-name', 'local')}"
-        )
+        auth_env_name = request.headers.get("auth-env-name", "local")
+        keycloak_env = app_settings.get(f"keycloak_{auth_env_name}")
         if not keycloak_env:
-            logging.error(f"keycloak_env: {keycloak_env}")
+            logging.error("Keycloak environment not found")
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
             )
@@ -52,15 +51,14 @@ def auth_header(
         )
         try:
             keycloak_openid.userinfo(auth_cred.credentials)
-            logging.info(f"Keycloak: {keycloak_openid}")
+            logging.info("Keycloak authentication successful")
         except KeycloakAuthenticationError:
-            logging.error(f"KeycloakAuthenticationError: {keycloak_openid}")
+            logging.error("Keycloak authentication failed")
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="Forbidden"
             )
         except Exception as e:
-            logging.info(f"Error: {e}")
-
+            logging.error(f"Unexpected error during Keycloak authentication: {e}")
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
@@ -76,11 +74,12 @@ async def lifespan(application: FastAPI):
     yield
 
 
+build_date = os.environ.get("BUILD_DATE", "unknown")
 app = FastAPI(
-    title=project_details["title"],
-    description=project_details["description"],
-    version=project_details["version"],
-    lifespan=lifespan,
+    title=project_details['title'],
+    description=project_details['description'],
+    version=f"{project_details['version']} (Build Date: {build_date})",
+    lifespan=lifespan
 )
 
 LOG_FILE = app_settings.LOG_FILE
