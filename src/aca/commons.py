@@ -43,13 +43,28 @@ def installed_repos_configs():
                 logging.error(f"Invalid configuration in {repo_conf_filename}")
                 continue
 
-            can_be_added = any(
-                requests.get(convert_transformer_url(transformer.transformer_url)).status_code == 200
-                and requests.get(convert_transformer_url(transformer.transformer_url)).json()
+            transformed_metadata_urls = [
+                convert_transformer_url(transformer.transformer_url)
                 for target_repo in repo_assistant.targets
                 if target_repo.metadata
                 for transformer in (target_repo.metadata.transformed_metadata or [])
-            )
+            ]
+
+            if not transformed_metadata_urls:
+                logging.warning(
+                    f"{repo_conf_filename} does not define transformed metadata URLs. Loading configuration anyway."
+                )
+                can_be_added = True
+            else:
+                can_be_added = False
+                for transformer_url in transformed_metadata_urls:
+                    try:
+                        response = requests.get(transformer_url, timeout=5)
+                        if response.status_code == 200 and response.json():
+                            can_be_added = True
+                            break
+                    except requests.RequestException as exc:
+                        logging.warning(f"Transformer URL check failed for {transformer_url}: {exc}")
 
             if can_be_added:
                 app_names.append(repo_assistant.app_name)

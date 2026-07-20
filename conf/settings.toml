@@ -3,7 +3,7 @@
 repositories_conf_dir = "@format {env[BASE_DIR]}/resources/saved-repos-conf"
 repositories_schema_dir = "@format {env[BASE_DIR]}/resources/repo-schemas"
 
-otlp_enable = false
+otlp_enable = true
 log_file = "@format {env[BASE_DIR]}/logs/aca.log"
 #log_file = "@format {env[BASE_DIR]}/logs/ras.log"
 log_level = 10

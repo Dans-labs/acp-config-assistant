@@ -27,7 +27,7 @@ api_keys = [app_settings.ACP_CONFIG_ASSISTANT_SERVICE_API_KEY]
 security = HTTPBearer()
 
 APP_NAME = os.environ.get("APP_NAME", "ACP Config Assistant Service")
-EXPOSE_PORT = os.environ.get("EXPOSE_PORT", 2810)
+EXPOSE_PORT = int(os.environ.get("EXPOSE_PORT", 2810))
 OTLP_GRPC_ENDPOINT = os.environ.get("OTLP_GRPC_ENDPOINT", "http://localhost:4317")
 
 
