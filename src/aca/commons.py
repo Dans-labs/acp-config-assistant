@@ -3,11 +3,11 @@ import logging
 import os
 
 import requests
-from akmi_utils.models import ras
 from akmi_utils import commons as a_commons
 from dynaconf import Dynaconf
 from pydantic import ValidationError
 from urllib.parse import urlparse, urlunparse, urlencode
+from src.aca.models import repository_assistant_config as ras
 
 base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["BASE_DIR"] = os.getenv("BASE_DIR", base_dir)
