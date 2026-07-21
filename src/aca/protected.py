@@ -1,4 +1,5 @@
 import json
+import hashlib
 import logging
 import os
 from typing import Union
@@ -46,6 +47,40 @@ def get_name_from_repositories_list(name: str):
     else:
         logging.debug(f"{name} does not exist")
     raise HTTPException(404, f"{name} not found")
+
+
+def _resolve_repo_config(name: str) -> ras.RepoAssistantDataModel:
+    if name not in data.keys():
+        logging.debug(f"{name} does not exist")
+        raise HTTPException(404, f"{name} not found")
+
+    return data[name]
+
+
+def _config_version_hash(config: ras.RepoAssistantDataModel) -> str:
+    serialized = json.dumps(
+        config.model_dump(by_alias=True, exclude_none=True),
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return hashlib.sha1(serialized.encode("utf-8")).hexdigest()
+
+
+@router.get("/name/{name}/version/{version}")
+def get_name_with_version(name: str, version: str):
+    repo_config = _resolve_repo_config(name)
+    resolved_version = _config_version_hash(repo_config)
+
+    if not resolved_version.startswith(version):
+        raise HTTPException(
+            status_code=404,
+            detail=(
+                f"{name} version {version} not found; "
+                f"current version is {resolved_version}"
+            ),
+        )
+
+    return repo_config.model_dump_json(by_alias=True, exclude_none=True)
 
 
 @router.post("/seek-advice", status_code=200)
