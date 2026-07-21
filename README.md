@@ -51,14 +51,14 @@ The **ACP Config Assistant (ACA)** is a FastAPI service that manages and provide
 ### Setup
 
 1. **Open the project in PyCharm:**
-   - File → Open → `/Users/akmi/dev/work/dans/odissei-acp-poc`
+   - File → Open → `/Users/akmi/dev/work/dans/orchestrator-acp-poc`
 
 2. **Configure Python Interpreter:**
    - PyCharm → Preferences (or File → Settings)
    - Project → Python Interpreter
    - Click ⚙️ → Add
    - Select "Existing Environment"
-   - Choose: `/Users/akmi/dev/work/dans/odissei-acp-poc/services/aca/.venv/bin/python`
+   - Choose: `/Users/akmi/dev/work/dans/orchestrator-acp-poc/services/aca/.venv/bin/python`
    - Click OK
 
 3. **Install Dependencies:**
@@ -76,12 +76,12 @@ The **ACP Config Assistant (ACA)** is a FastAPI service that manages and provide
 3. **Fill in the following:**
    - **Name:** `ACA (Local)`
    - **Module name:** `src.main` (⚠️ NOT Script path)
-   - **Working directory:** `/Users/akmi/dev/work/dans/odissei-acp-poc/services/aca`
+   - **Working directory:** `/Users/akmi/dev/work/dans/orchestrator-acp-poc/services/aca`
    - **Python interpreter:** Select the ACA venv you set up above
    - **Environment variables:**
      ```
-     BASE_DIR=/Users/akmi/dev/work/dans/odissei-acp-poc/services/aca;
-     PYTHONPATH=/Users/akmi/dev/work/dans/odissei-acp-poc/services/aca/src;
+     BASE_DIR=/Users/akmi/dev/work/dans/orchestrator-acp-poc/services/aca;
+     PYTHONPATH=/Users/akmi/dev/work/dans/orchestrator-acp-poc/services/aca/src;
      EXPOSE_PORT=2810;
      OTLP_GRPC_ENDPOINT=http://localhost:4317
      ```
@@ -140,7 +140,7 @@ ACA reads configuration from TOML files located in the `conf/` directory:
 
 ## 🌐 Integration with ACP
 
-ACA is a core component of the ODISSEI ACP stack:
+ACA is a core component of the ORCHESTRATOR ACP stack:
 - **Used by ACP** for dynamic repository configuration retrieval
 - **Works with MTS** (Metadata Transformation Service) for metadata transformations
 - **Integrates with RQ** for background job processing
