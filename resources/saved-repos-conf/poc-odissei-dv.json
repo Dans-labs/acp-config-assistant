@@ -1,54 +1,38 @@
 {
-    "assistant-config-name": "dataverseNL-Groningen",
-    "app-name": "hello",
+    "name": "odissei-dans-oai",
+    "app_name": "odissei",
+    "source": {
+        "plugin": "oai-pmh",
+        "base_url": "https://ssh.datastations.nl/oai",
+        "metadata_prefix": "oai_ddi25",
+        "set_spec": null,
+        "mode": "records",
+        "deleted_record_policy": "tombstone",
+        "timeout_seconds": 60,
+        "verify_ssl": true,
+        "user_agent": "ODISSEI-ACP-Harvester/0.1",
+        "authentication": null
+    },
+    "harvesting": {
+        "queue_name": "odissei-provider",
+        "incremental": true,
+        "overlap_days": 1,
+        "batch_size": 500,
+        "maximum_records": null,
+        "store_raw_xml": false,
+        "validate_metadata_format": true
+    },
+    "pipeline": {
+        "metadata_type": "application/xml",
+        "transformer": {
+            "name": "ddi-to-dataverse",
+            "service_url": "http://mts:1745"
+        }
+    },
     "targets": [
         {
-            "repo-pid": "1",
-            "repo-name": "portal.devstack.odissei.nl",
-            "repo-display-name": "Portal ODISSEI DEV",
-            "bridge-plugin-name": "DataverseIngester",
-            "base-url": "https://portal.devstack.odissei.nl",
-            "target-url": "https://portal.devstack.odissei.nl/api/dataverses/DV_NL/datasets/:import",
-            "target-url-params": "pid=$PID&release=no",
-            "payload": {
-                "doi": "",
-                "metadata_format": "",
-                "base_url": ""
-            }, 
-            "metadata": {
-                "processed-metadata": [
-                    {
-                        "hook-name": "odissei", 
-                        "process-function": "dataverse_metadata_fetcher",
-                        "service-url": "https://dataverse-fetcher.labs.dansdemo.nl/dataverse-metadata-fetcher",
-                        "name": "fetcher"
-                    },
-                    {
-                        "hook-name": "odissei",
-                        "process-function": "dataverse_mapper",
-                        "service-url": "https://dataverse-mapper.labs.dansdemo.nl/mapper",
-                        "name": "mapper"
-                    },
-                    {
-                        "hook-name": "odissei",
-                        "service-url": "https://metadata-refiner.labs.dansdemo.nl/metadata-refinement/datastation",
-                        "process-function": "refine_metadata",
-                        "name": "refiner"
-                    },
-                    {
-                        "hook-name": "odissei",
-                        "service-url": "https://version-tracker.labs.dansdemo.nl",
-                        "process-function": "add_workflow_versioning_url",
-                        "name": "version"
-                    },
-                    {
-                        "hook-name": "odissei",
-                        "service-url": "https://metadata-enhancer.labs.dansdemo.nl/enrich/elsst/en",
-                        "process-function": "enrich_metadata",
-                        "name": "enhancer"
-                    }
-                ]
-            }             
+            "name": "odissei-dataverse",
+            "bridge_plugin_name": "DataverseBridge"
         }
     ]
 }

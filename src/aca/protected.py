@@ -11,7 +11,7 @@ from pydantic_core import ValidationError
 from json_logic import jsonLogic
 
 from src.aca.commons import app_settings, data, installed_repos_configs, project_details
-from akmi_utils.models import ras
+from src.aca.models import repository_assistant_config as ras
 
 from src.aca.models.request_advice_model import RepositoryAdviceModel
 
