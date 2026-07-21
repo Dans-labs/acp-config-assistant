@@ -26,13 +26,13 @@ class SourceConfig(BaseModel):
     timeout_seconds: float = Field(default=60, gt=0)
 
     verify_ssl: bool = True
-    user_agent: str = "ODISSEI-ACP-Harvester/0.1"
+    user_agent: str = "ORCHESTRATOR-ACP-Harvester/0.1"
 
     authentication: OAIPMHAuthenticationConfig | None = None
 
 
 class HarvestingConfig(BaseModel):
-    queue_name: str = "odissei-provider"
+    queue_name: str = "orchestrator-provider"
 
     incremental: bool = True
     overlap_days: int = Field(default=1, ge=0, le=30)

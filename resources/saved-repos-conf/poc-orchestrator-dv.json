@@ -1,6 +1,6 @@
 {
-    "name": "odissei-dans-oai",
-    "app_name": "odissei",
+    "name": "orchestrator-dans-oai",
+    "app_name": "orchestrator",
     "source": {
         "plugin": "oai-pmh",
         "base_url": "https://ssh.datastations.nl/oai",
@@ -10,11 +10,11 @@
         "deleted_record_policy": "tombstone",
         "timeout_seconds": 60,
         "verify_ssl": true,
-        "user_agent": "ODISSEI-ACP-Harvester/0.1",
+        "user_agent": "ORCHESTRATOR-ACP-Harvester/0.1",
         "authentication": null
     },
     "harvesting": {
-        "queue_name": "odissei-provider",
+        "queue_name": "orchestrator-provider",
         "incremental": true,
         "overlap_days": 1,
         "batch_size": 500,
@@ -31,7 +31,7 @@
     },
     "targets": [
         {
-            "name": "odissei-dataverse",
+            "name": "orchestrator-dataverse",
             "bridge_plugin_name": "DataverseBridge"
         }
     ]
