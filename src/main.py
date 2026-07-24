@@ -14,6 +14,7 @@ import uvicorn
 from fastapi import FastAPI, Request, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.staticfiles import StaticFiles
 from keycloak import KeycloakOpenID, KeycloakAuthenticationError
 from starlette import status
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -29,6 +30,19 @@ security = HTTPBearer()
 APP_NAME = os.environ.get("APP_NAME", "ACP Config Assistant Service")
 EXPOSE_PORT = int(os.environ.get("EXPOSE_PORT", 2810))
 OTLP_GRPC_ENDPOINT = os.environ.get("OTLP_GRPC_ENDPOINT", "http://localhost:4317")
+
+
+def _resolve_frontend_dir() -> str:
+    candidates = [
+        f"{os.environ['BASE_DIR']}/resources/frontend",
+        "/bootstrap/aca/resources/frontend",
+    ]
+    for candidate in candidates:
+        if os.path.isdir(candidate) and os.path.isfile(os.path.join(candidate, "workflow-builder.html")):
+            return candidate
+    raise RuntimeError(
+        f"ACA frontend directory not found or incomplete. Checked: {', '.join(candidates)}"
+    )
 
 
 def auth_header(
@@ -114,6 +128,12 @@ app.include_router(public.router, tags=["Public"], prefix="")
 
 app.include_router(
     protected.router, tags=["Protected"], prefix="", dependencies=[Depends(auth_header)]
+)
+
+app.mount(
+    "/frontend",
+    StaticFiles(directory=_resolve_frontend_dir(), html=True),
+    name="frontend",
 )
 
 
