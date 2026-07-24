@@ -48,6 +48,7 @@ def installed_repos_configs():
                 for target_repo in repo_assistant.targets
                 if target_repo.metadata
                 for transformer in (target_repo.metadata.transformed_metadata or [])
+                if transformer.transformer_url
             ]
 
             if not transformed_metadata_urls:
@@ -79,6 +80,9 @@ def installed_repos_configs():
         except (json.JSONDecodeError, ValidationError) as e:
             logging.error(f"Error processing {repo_conf_filename}: {e}")
             continue
+        except Exception as e:
+            logging.exception(f"Unexpected error processing {repo_conf_filename}: {e}")
+            continue
 
     data["app_names"] = app_names
     logging.info(f"Available apps: {sorted(app_names)}")
@@ -89,12 +93,12 @@ def convert_transformer_url(original_url):
     Converts a transformer URL to the saved XSL list format.
 
     Args:
-        original_url (str): The original transformer URL.
+        original_url (str | HttpUrl): The original transformer URL.
 
     Returns:
         str: The converted URL in the saved XSL list format.
     """
-    parsed_url = urlparse(original_url)
+    parsed_url = urlparse(str(original_url))
     xslt_name = parsed_url.path.rsplit("/", 1)[-1]  # Extract the last part of the path
     new_query = urlencode({"xslt_name": xslt_name})
     return urlunparse(parsed_url._replace(path="/saved-xsl-list", query=new_query))
