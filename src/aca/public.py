@@ -10,7 +10,7 @@ router = APIRouter()
 @router.get("/repositories")
 def get_repositories_list():
     logging.debug("get_repositories_list")
-    repos = [akm for akm in list(data.keys()) if akm != "service-version"]
+    repos = [akm for akm in list(data.keys()) if akm not in {"service-version", "app_names"}]
     return {"repositories": repos}
 
 

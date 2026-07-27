@@ -1,0 +1,33 @@
+{
+    "assistant-config-name": "rda.prod.zenodo-elastic",
+    "description": "",
+    "app-name": "rda",
+    "targets": [
+        {
+            "repo-pid": "rda",
+            "repo-name": "zenodo",
+            "repo-display-name": "Zenodo Prod Environment",
+            "bridge-plugin-name": "ZenodoApiDepositor",
+            "base-url": "https://sandbox.zenodo.org",
+            "target-url": "https://sandbox.zenodo.org/api/deposit/depositions",
+            "username": "access_token",
+            "password": "",
+            "metadata": {
+                "specification": [],
+                "transformed-metadata": [
+                    {
+                        "transformer-url": "http://localhost:1745/transform/rda-form-metadata-to-zenodo-dataset-v5-doi-patch.xsl",
+                        "name": "zenodo-dataset.json",
+                        "dir": ""
+                    },
+                    {
+                        "transformer-url": "http://localhost:1745/transform/form-metadata-to-dataverse-file-v1.xsl",
+                        "name": "zenodo-file.json",
+                        "dir": ""
+                    }
+                ]
+            },
+            "storage-type": "FILE_SYSTEM"
+        }
+    ]
+}
