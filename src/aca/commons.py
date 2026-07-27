@@ -51,21 +51,28 @@ def installed_repos_configs():
                 if transformer.transformer_url
             ]
 
+            # Keep assistant configs loadable even when MTS is temporarily unavailable
+            # (e.g. ACA starts before MTS in docker compose). We still log failed checks.
+            can_be_added = True
             if not transformed_metadata_urls:
                 logging.warning(
                     f"{repo_conf_filename} does not define transformed metadata URLs. Loading configuration anyway."
                 )
-                can_be_added = True
             else:
-                can_be_added = False
+                has_verified_transformer = False
                 for transformer_url in transformed_metadata_urls:
                     try:
                         response = requests.get(transformer_url, timeout=5)
                         if response.status_code == 200 and response.json():
-                            can_be_added = True
+                            has_verified_transformer = True
                             break
                     except requests.RequestException as exc:
                         logging.warning(f"Transformer URL check failed for {transformer_url}: {exc}")
+                if not has_verified_transformer:
+                    logging.warning(
+                        f"{repo_conf_filename} transformer URLs could not be verified at startup. "
+                        "Loading configuration anyway."
+                    )
 
             if can_be_added:
                 app_names.append(repo_assistant.app_name)
@@ -76,7 +83,7 @@ def installed_repos_configs():
                 data[repo_assistant.assistant_config_name] = repo_assistant
                 logging.info(f"Loaded configuration: {repo_assistant.assistant_config_name} from {repo_conf_filename}")
             else:
-                logging.error(f"Invalid configuration in {repo_conf_filename}: No valid transformer URLs found.")
+                logging.error(f"Invalid configuration in {repo_conf_filename}")
         except (json.JSONDecodeError, ValidationError) as e:
             logging.error(f"Error processing {repo_conf_filename}: {e}")
             continue

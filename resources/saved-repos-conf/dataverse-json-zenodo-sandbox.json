@@ -1,0 +1,51 @@
+{
+  "assistant-config-name": "dataverse-json-zenodo-sandbox",
+  "description": "Harvest one OAI-PMH dataverse_json record and deposit to Zenodo sandbox via ACP.",
+  "app-name": "rda",
+  "source": {
+    "plugin": "oai-pmh",
+    "base_url": "https://dataverse.nl/oai",
+    "metadata_prefix": "dataverse_json",
+    "set_spec": null,
+    "mode": "records",
+    "deleted_record_policy": "tombstone",
+    "timeout_seconds": 60,
+    "verify_ssl": true,
+    "user_agent": "ORCHESTRATOR-ACP-Harvester/0.1",
+    "authentication": null
+  },
+  "harvesting": {
+    "incremental": true,
+    "batch_size": 500
+  },
+  "pipeline": {
+    "metadata_type": "application/json",
+    "transformer": {
+      "name": "dataverse-json-to-zenodo",
+      "service_url": "http://mts:1745"
+    }
+  },
+  "targets": [
+    {
+      "repo-pid": "dv-json-zenodo-sandbox",
+      "repo-name": "zenodo-sandbox",
+      "repo-display-name": "Zenodo Sandbox (Dataverse OAI harvest)",
+      "bridge-plugin-name": "ZenodoApiDepositor",
+      "base-url": "https://sandbox.zenodo.org",
+      "target-url": "https://sandbox.zenodo.org/api/deposit/depositions",
+      "username": "access_token",
+      "password": "",
+      "storage-type": "FILE_SYSTEM",
+      "metadata": {
+        "specification": [],
+        "transformed-metadata": [
+          {
+            "transformer-url": "http://mts:1745/transform/dataverse-json-to-zenodo-dataset-v1.xsl",
+            "name": "zenodo-dataset.json",
+            "dir": ""
+          }
+        ]
+      }
+    }
+  ]
+}

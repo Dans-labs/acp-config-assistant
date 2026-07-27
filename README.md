@@ -43,6 +43,16 @@ The **ACP Config Assistant (ACA)** is a FastAPI service that manages and provide
 3. **Access the API:**
    - Swagger UI: `http://localhost:2810/docs`
    - ReDoc: `http://localhost:2810/redoc`
+   - Config editor UI: `http://localhost:2810/frontend/workflow-builder.html`
+
+   The config editor loads and saves `resources/saved-repos-conf/*.json` through ACA. Enter an ACA bearer token in the sidebar before using the load/save/delete actions.
+
+4. **Validate repository config JSON:**
+   ```bash
+   python -m src.aca.validate_repo_assistant resources/saved-repos-conf/ohsmart-demo.json
+   # or validate all json files in a directory
+   python -m src.aca.validate_repo_assistant resources/saved-repos-conf
+   ```
 
 ---
 
