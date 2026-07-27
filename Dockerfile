@@ -33,6 +33,9 @@ ENV APP_NAME="Repository Asistant Service"
 ENV PATH="/home/akmi/aca/.venv/bin:$PATH"
 # Copy the application into the container.
 COPY src ./src
+COPY conf /bootstrap/aca/conf
+COPY resources /bootstrap/aca/resources
+COPY docker-entrypoint.sh ./docker-entrypoint.sh
 COPY pyproject.toml .
 COPY README.md .
 COPY uv.lock .
@@ -40,7 +43,9 @@ COPY uv.lock .
 RUN uv venv --clear .venv
 # Install dependencies
 
-RUN uv sync --frozen --no-cache && chown -R akmi:akmi ${BASE_DIR}
+RUN chmod +x ${BASE_DIR}/docker-entrypoint.sh && \
+    uv sync --frozen --no-cache && \
+    chown -R akmi:akmi ${BASE_DIR} /bootstrap/aca
 USER akmi
 # Run the application.
 CMD ["python", "-m", "src.main"]

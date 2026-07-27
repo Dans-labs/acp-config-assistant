@@ -7,6 +7,7 @@ from typing import Union
 import jmespath
 import requests
 from fastapi import APIRouter, Request, HTTPException
+from fastapi.responses import JSONResponse
 from pydantic_core import ValidationError
 
 from json_logic import jsonLogic
@@ -17,6 +18,40 @@ from src.aca.models import repository_assistant_config as ras
 from src.aca.models.request_advice_model import RepositoryAdviceModel
 
 router = APIRouter()
+
+
+def _iter_repo_config_paths() -> list[str]:
+    return sorted(
+        os.path.join(app_settings.repositories_conf_dir, entry)
+        for entry in os.listdir(app_settings.repositories_conf_dir)
+        if entry.endswith(".json")
+    )
+
+
+def _read_repo_config_file(path: str) -> dict:
+    with open(path, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+def _repo_config_name(repo_conf_json: dict, fallback_path: str | None = None) -> str:
+    return (
+        repo_conf_json.get("assistant-config-name")
+        or repo_conf_json.get("name")
+        or (os.path.splitext(os.path.basename(fallback_path))[0] if fallback_path else "")
+    )
+
+
+def _find_repo_config_file(name: str) -> str | None:
+    for repo_conf_path in _iter_repo_config_paths():
+        repo_conf_json = _read_repo_config_file(repo_conf_path)
+        if _repo_config_name(repo_conf_json, repo_conf_path) == name:
+            return repo_conf_path
+    return None
+
+
+def _refresh_repo_cache() -> None:
+    data.clear()
+    installed_repos_configs()
 
 
 @router.get("/refresh", include_in_schema=False)
@@ -206,7 +241,7 @@ async def upload_repository(
     submitted_repo_conf: Request, overwrite: Union[bool, None] = False
 ):
     content_type = submitted_repo_conf.headers["Content-Type"]
-    if content_type != "application/json":
+    if not content_type.startswith("application/json"):
         raise HTTPException(
             status_code=400, detail=f"Content type {content_type} not supported"
         )
@@ -222,15 +257,16 @@ async def upload_repository(
                 f'You can use "/upload-repo?overwrite=true"',
             )
         else:
-            data.update({repo_assistant.assistant_config_name: repo_assistant})
             with open(
                 os.path.join(
                     app_settings.repositories_conf_dir,
                     f"{repo_assistant.assistant_config_name}.json",
                 ),
                 mode="w+",
+                encoding="utf-8",
             ) as file:
-                file.write(json.dumps(repo_conf_json))
+                json.dump(repo_conf_json, file, indent=2, ensure_ascii=False)
+            _refresh_repo_cache()
             return {"saved-conf": repo_assistant.assistant_config_name}
     except ValidationError as e:
         raise HTTPException(
@@ -241,21 +277,77 @@ async def upload_repository(
 
 @router.delete("/delete-repo/{name}")
 def delete_repository(name: str):
-    if name not in data:
+    repo_conf_path = _find_repo_config_file(name)
+    if repo_conf_path is None:
         raise HTTPException(status_code=404, detail=f"'{name}' not found.")
-
-    for repo_conf_filename in os.listdir(app_settings.repositories_conf_dir):
-        repo_conf_file = os.path.join(
-            app_settings.repositories_conf_dir, repo_conf_filename
-        )
-        with open(repo_conf_file, "r") as f:
-            repo_conf_json = json.loads(f.read())
-            if repo_conf_json["name"] == name:
-                os.remove(repo_conf_json)
-                data.pop(name)
-                return {"deleted": name}
+    os.remove(repo_conf_path)
+    _refresh_repo_cache()
+    return {"deleted": name}
 
 @router.get("/list-apps")
 def list_apps():
     app_names = data.get("app_names")
     return sorted(app_names)
+
+
+@router.get("/editor/configs", include_in_schema=False)
+def list_editor_configs():
+    configs = []
+    for repo_conf_path in _iter_repo_config_paths():
+        repo_conf_json = _read_repo_config_file(repo_conf_path)
+        configs.append(
+            {
+                "name": _repo_config_name(repo_conf_json, repo_conf_path),
+                "file-name": os.path.basename(repo_conf_path),
+            }
+        )
+    configs.sort(key=lambda item: item["name"])
+    return {"configs": configs}
+
+
+@router.get("/editor/configs/{name}", include_in_schema=False)
+def get_editor_config(name: str):
+    repo_conf_path = _find_repo_config_file(name)
+    if repo_conf_path is None:
+        raise HTTPException(status_code=404, detail=f"'{name}' not found.")
+    return JSONResponse(content=_read_repo_config_file(repo_conf_path))
+
+
+@router.put("/editor/configs/{source_name}", include_in_schema=False)
+async def save_editor_config(source_name: str, submitted_repo_conf: Request):
+    content_type = submitted_repo_conf.headers["Content-Type"]
+    if not content_type.startswith("application/json"):
+        raise HTTPException(
+            status_code=400, detail=f"Content type {content_type} not supported"
+        )
+
+    repo_conf_json = await submitted_repo_conf.json()
+    try:
+        repo_assistant = ras.RepoAssistantDataModel.model_validate(repo_conf_json)
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Repository Configuration {e.with_traceback(e.__traceback__)}",
+        )
+
+    target_name = repo_assistant.assistant_config_name
+    source_path = _find_repo_config_file(source_name)
+    target_path = os.path.join(
+        app_settings.repositories_conf_dir,
+        f"{target_name}.json",
+    )
+    existing_target_path = _find_repo_config_file(target_name)
+    if existing_target_path and source_path != existing_target_path and source_name != target_name:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Repository Configuration '{target_name}' already exists.",
+        )
+
+    if source_path and os.path.abspath(source_path) != os.path.abspath(target_path):
+        os.remove(source_path)
+
+    with open(target_path, "w", encoding="utf-8") as file:
+        json.dump(repo_conf_json, file, indent=2, ensure_ascii=False)
+
+    _refresh_repo_cache()
+    return {"saved-conf": target_name, "file-name": os.path.basename(target_path)}
