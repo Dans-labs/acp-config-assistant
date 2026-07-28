@@ -4,7 +4,7 @@ from enum import StrEnum
 from typing import Any, Literal
 from urllib.parse import urlparse
 
-from pydantic import AliasChoices, BaseModel, Field, HttpUrl, field_validator
+from pydantic import AliasChoices, AnyUrl, BaseModel, Field, HttpUrl, field_validator
 
 
 class OAIPMHAuthenticationConfig(BaseModel):
@@ -96,8 +96,8 @@ class Target(BaseModel):
         alias="bridge-plugin-name",
         validation_alias=AliasChoices("bridge-plugin-name", "bridge_plugin_name"),
     )
-    base_url: HttpUrl | None = Field(default=None, alias="base-url")
-    target_url: HttpUrl | None = Field(default=None, alias="target-url")
+    base_url: AnyUrl | None = Field(default=None, alias="base-url")
+    target_url: AnyUrl | None = Field(default=None, alias="target-url")
     target_url_params: str | None = Field(default=None, alias="target-url-params")
     payload: dict[str, Any] | None = None
     username: str | None = None
@@ -169,4 +169,3 @@ class RepositoryAssistantConfig(BaseModel):
 
 # Backward-compatible alias used across ACA code.
 RepoAssistantDataModel = RepositoryAssistantConfig
-
