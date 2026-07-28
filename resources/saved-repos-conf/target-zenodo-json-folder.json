@@ -1,7 +1,7 @@
 {
   "assistant-config-name": "zenodo-json-folder",
   "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
-  "app-name": "rdafolder",
+  "app-name": "harvest-dv-json-folder",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",

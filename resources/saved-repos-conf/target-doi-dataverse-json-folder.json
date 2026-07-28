@@ -1,7 +1,7 @@
 {
   "assistant-config-name": "doi-dataverse-json-folder",
   "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
-  "app-name": "rdadoijsonfolder",
+  "app-name": "harvest-doi-jsonfolder",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",
@@ -66,8 +66,7 @@
                         "dir": "metadata"
                     }
                 ]
-            }
-    ,
+            },
       "input": {
                 "from-target-name": "doi-output"
             }

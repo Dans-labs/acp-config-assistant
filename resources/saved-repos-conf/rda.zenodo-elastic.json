@@ -1,7 +1,7 @@
 {
     "assistant-config-name": "rda.prod.zenodo-elastic",
     "description": "",
-    "app-name": "rda",
+    "app-name": "rda-demo",
     "targets": [
         {
             "repo-pid": "rda",
