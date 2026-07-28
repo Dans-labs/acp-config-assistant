@@ -1,7 +1,7 @@
 {
-  "assistant-config-name": "dataverse-json-zenodo-sandbox",
-  "description": "Harvest one OAI-PMH dataverse_json record and deposit to Zenodo sandbox via ACP.",
-  "app-name": "zenodo-sandbox",
+  "assistant-config-name": "zenodo-json-folder",
+  "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
+  "app-name": "harvest-dv-json-folder",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",
@@ -27,13 +27,13 @@
   },
   "targets": [
     {
-      "repo-pid": "dv-json-zenodo-sandbox",
-      "repo-name": "zenodo-sandbox",
-      "repo-display-name": "Zenodo Sandbox (Dataverse OAI harvest)",
-      "bridge-plugin-name": "ZenodoApiDepositor",
-      "base-url": "https://sandbox.zenodo.org",
-      "target-url": "https://sandbox.zenodo.org/api/deposit/depositions",
-      "username": "access_token",
+      "repo-pid": "dv-json-folder",
+      "repo-name": "folder-output",
+      "repo-display-name": "Folder Output (Dataverse OAI harvest)",
+      "bridge-plugin-name": "FolderPipelineDepositor",
+      "base-url": "file:///home/akmi/acp/data/pipeline-output",
+      "target-url": "file:///home/akmi/acp/data/pipeline-output",
+      "username": "",
       "password": "",
       "storage-type": "FILE_SYSTEM",
       "metadata": {
@@ -42,7 +42,11 @@
           {
             "transformer-url": "http://mts:1745/transform/dataverse-json-to-zenodo-dataset-v1.xsl",
             "name": "zenodo-dataset.json",
-            "dir": ""
+            "dir": "final"
+          },
+          {
+            "name": "source-metadata.json",
+            "dir": "source"
           }
         ]
       }
