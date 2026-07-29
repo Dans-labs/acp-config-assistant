@@ -1,7 +1,7 @@
 {
-  "assistant-config-name": "dataverse-json-zenodo-sandbox",
+  "assistant-config-name": "harvest-dvnl-ingest-zenodo-sandbox",
   "description": "Harvest one OAI-PMH dataverse_json record and deposit to Zenodo sandbox via ACP.",
-  "app-name": "zenodo-sandbox",
+  "app-name": "hvs-dvnl-ingest-zenodo-sandbox",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",
