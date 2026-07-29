@@ -1,5 +1,5 @@
 {
-  "assistant-config-name": "doi-ssh-json-folder",
+    "assistant-config-name": "harvest-ssh-dv-folder",
   "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
   "app-name": "harvest-ssh-jsonfolder",
   "source": {
@@ -31,8 +31,8 @@
       "repo-name": "doi-output",
       "repo-display-name": "Get DOI)",
       "bridge-plugin-name": "RetrieveDataverseJson",
-      "base-url": "file:///home/akmi/acp/data/pipeline-ssh-doi-json",
-      "target-url": "file:///home/akmi/acp/data/pipeline-ssh-doi-json",
+      "base-url": "file:///home/akmi/acp/data/output/harvest/ssh-dv",
+      "target-url": "file:///home/akmi/acp/data/output/harvest/ssh-dv",
       "username": "",
       "password": "",
       "storage-type": "FILE_SYSTEM",

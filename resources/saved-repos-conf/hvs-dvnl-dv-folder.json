@@ -1,7 +1,7 @@
 {
-  "assistant-config-name": "doi-dataverse-json-folder",
+  "assistant-config-name": "harvest-dvnl-dv-folder",
   "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
-  "app-name": "harvest-doi-jsonfolder",
+  "app-name": "harvest-dvnl-jsonfolder",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",
@@ -31,8 +31,8 @@
       "repo-name": "doi-output",
       "repo-display-name": "Get DOI)",
       "bridge-plugin-name": "RetrieveDataverseJson",
-      "base-url": "file:///home/akmi/acp/data/pipeline-dv-doi-json",
-      "target-url": "file:///home/akmi/acp/data/pipeline-dv-doi-json",
+      "base-url": "file:///home/akmi/acp/data/output/harvest/dvnl-dv",
+      "target-url": "file:///home/akmi/acp/data/output/harvest/dvnl-dv",
       "username": "",
       "password": "",
       "storage-type": "FILE_SYSTEM",

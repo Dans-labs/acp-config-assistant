@@ -1,7 +1,7 @@
 {
-  "assistant-config-name": "zenodo-json-folder",
+  "assistant-config-name": "harvest-dvnl-zenodo-folder",
   "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
-  "app-name": "harvest-dv-json-folder",
+  "app-name": "harvest-zenodo-jsonfolder",
   "source": {
     "plugin": "oai-pmh",
     "base_url": "https://dataverse.nl/oai",
@@ -31,8 +31,8 @@
       "repo-name": "folder-output",
       "repo-display-name": "Folder Output (Dataverse OAI harvest)",
       "bridge-plugin-name": "FolderPipelineDepositor",
-      "base-url": "file:///home/akmi/acp/data/pipeline-output",
-      "target-url": "file:///home/akmi/acp/data/pipeline-output",
+      "base-url": "file:///home/akmi/acp/data/output/harvest/dvnl-zenodo",
+      "target-url": "file:///home/akmi/acp/data/outputharvest/dvnl-zenodo",
       "username": "",
       "password": "",
       "storage-type": "FILE_SYSTEM",
