@@ -1,7 +1,7 @@
 {
-    "assistant-config-name": "demo-dataverse.ssh.datastations.nl",
+    "assistant-config-name": "ohsmart-demo",
     "description": "",
-    "app-name": "ohsmart",
+    "app-name": "ohsmart-demo",
     "targets": [
         {
 	    "repo-pid": "demo",

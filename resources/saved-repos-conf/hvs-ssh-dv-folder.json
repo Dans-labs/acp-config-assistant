@@ -1,0 +1,75 @@
+{
+    "assistant-config-name": "harvest-ssh-dv-folder",
+  "description": "Harvest one OAI-PMH dataverse_json record and save final pipeline output to a folder via ACP.",
+  "app-name": "harvest-ssh-jsonfolder",
+  "source": {
+    "plugin": "oai-pmh",
+    "base_url": "https://ssh.datastations.nl/oai",
+    "metadata_prefix": "oai_dc",
+    "set_spec": null,
+    "mode": "records",
+    "deleted_record_policy": "tombstone",
+    "timeout_seconds": 60,
+    "verify_ssl": true,
+    "user_agent": "ORCHESTRATOR-ACP-Harvester/0.1",
+    "authentication": null
+  },
+  "harvesting": {
+    "incremental": true,
+    "batch_size": 500
+  },
+  "pipeline": {
+    "metadata_type": "application/json",
+    "transformer": {
+      "name": "dataverse-json-to-zenodo",
+      "service_url": "http://mts:1745"
+    }
+  },
+  "targets": [
+    {
+      "repo-pid": "dv-doi",
+      "repo-name": "doi-output",
+      "repo-display-name": "Get DOI)",
+      "bridge-plugin-name": "RetrieveDataverseJson",
+      "base-url": "file:///home/akmi/acp/data/output/harvest/ssh-dv",
+      "target-url": "file:///home/akmi/acp/data/output/harvest/ssh-dv",
+      "username": "",
+      "password": "",
+      "storage-type": "FILE_SYSTEM",
+      "metadata": {
+                "specification": [],
+                "transformed-metadata": [
+                    {
+                        "name": "dataset-metadata.json",
+                        "transformer-url": "http://mts:1745/transform/oai-dc-identifier-to-doi-json-v1.xsl",
+                        "dir": "metadata"
+                    }
+                ]
+            }
+    },
+    {
+      "repo-pid": "dv-json-folder",
+      "repo-name": "folder-output",
+      "repo-display-name": "Folder Output (Dataverse OAI harvest)",
+      "bridge-plugin-name": "FolderPipelineDepositor",
+      "base-url": "file:///home/akmi/acp/data/pipeline-output-ssh-json",
+      "target-url": "file:///home/akmi/acp/data/pipeline-output-ssh-json",
+      "username": "",
+      "password": "",
+      "storage-type": "FILE_SYSTEM",
+      "metadata": {
+                "specification": [],
+                "transformed-metadata": [
+                    {
+                        "name": "dataset-metadata.json",
+                        "transformer-url": "http://mts:1745/transform/dataverse-json-export-to-dataverse-ingest-v1.xsl",
+                        "dir": "metadata"
+                    }
+                ]
+            },
+      "input": {
+                "from-target-name": "dv-doi"
+            }
+    }
+  ]
+}

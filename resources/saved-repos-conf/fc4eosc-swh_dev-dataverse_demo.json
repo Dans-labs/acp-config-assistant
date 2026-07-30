@@ -1,7 +1,7 @@
 {
     "assistant-config-name": "faircore4eosc-swh_dev-dataverse_demo",
     "description": "",
-    "app-name": "faircore4eosc",
+    "app-name": "faircore4eosc-demo",
     "targets": [
         {
 	    "repo-pid": "001",
