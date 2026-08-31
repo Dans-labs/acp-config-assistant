@@ -69,8 +69,15 @@ async def do_refresh():
     return {"repositories": repos}
 
 
-@router.get("/name/{name}")
+@router.get("/name/{name}", summary="Get repository configuration by name")
 def get_name_from_repositories_list(name: str):
+    """
+    Retrieve the full assistant configuration for a named repository.
+
+    Looks up the repository identified by `name` in the in-memory configuration
+    store and returns its complete assistant data model serialised as JSON.
+    Returns 404 if the name is not found.
+    """
     logging.debug(f"get_name_from_repositories_list - name: {name}")
     logging.debug(f"{data.keys()}")
     if name in data.keys():
@@ -101,8 +108,16 @@ def _config_version_hash(config: ras.RepoAssistantDataModel) -> str:
     return hashlib.sha1(serialized.encode("utf-8")).hexdigest()
 
 
-@router.get("/name/{name}/version/{version}")
+@router.get("/name/{name}/version/{version}", summary="Get repository configuration at a specific version")
 def get_name_with_version(name: str, version: str):
+    """
+    Retrieve a repository assistant configuration pinned to a specific content version.
+
+    The `version` parameter is matched against a SHA-1 hash derived from the
+    serialised configuration. The check is prefix-based, so a short version
+    prefix (e.g. the first 7 characters) is sufficient. Returns 404 when the
+    name is not found or the hash does not match the current configuration.
+    """
     repo_config = _resolve_repo_config(name)
     resolved_version = _config_version_hash(repo_config)
 
@@ -118,8 +133,19 @@ def get_name_with_version(name: str, version: str):
     return repo_config.model_dump_json(by_alias=True, exclude_none=True)
 
 
-@router.post("/seek-advice", status_code=200)
+@router.post("/seek-advice", status_code=200, summary="Get repository recommendations")
 async def get_repo_advices(submitted_repo_data: Request):
+    """
+    Recommend suitable repositories for a dataset based on its metadata attributes.
+
+    Accepts a JSON payload describing the dataset (affiliation, domain, file type,
+    etc.), consults an external metadata transformer to resolve the scientific
+    domain, and applies rule-based logic to select the best matching repositories
+    from the available configuration. Returns a list of repository advice objects.
+
+    The request body must be `application/json` and conform to the
+    `RepositoryAdviceModel` schema.
+    """
     content_type = submitted_repo_data.headers["Content-Type"]
     if content_type != "application/json":
         raise HTTPException(
@@ -236,10 +262,22 @@ async def get_repo_advices(submitted_repo_data: Request):
     return {"advice": advice}
 
 
-@router.post("/upload-repo", status_code=201)
+@router.post("/upload-repo", status_code=201, summary="Upload a new repository configuration")
 async def upload_repository(
     submitted_repo_conf: Request, overwrite: Union[bool, None] = False
 ):
+    """
+    Register a new repository assistant configuration.
+
+    Accepts a JSON body that conforms to the `RepoAssistantDataModel` schema,
+    validates it, and persists it as a JSON file in the configured repositories
+    directory. The in-memory configuration cache is refreshed immediately after
+    saving so that the new entry is available without a service restart.
+
+    Set `overwrite=true` to replace an existing configuration with the same
+    `assistant-config-name`. By default an HTTP 400 is returned if the name
+    already exists.
+    """
     content_type = submitted_repo_conf.headers["Content-Type"]
     if not content_type.startswith("application/json"):
         raise HTTPException(
@@ -275,8 +313,15 @@ async def upload_repository(
         )
 
 
-@router.delete("/delete-repo/{name}")
+@router.delete("/delete-repo/{name}", summary="Delete a repository configuration")
 def delete_repository(name: str):
+    """
+    Remove a repository assistant configuration by name.
+
+    Locates the JSON configuration file for the given `name`, deletes it from
+    disk and refreshes the in-memory cache. Returns 404 if no configuration
+    with that name exists.
+    """
     repo_conf_path = _find_repo_config_file(name)
     if repo_conf_path is None:
         raise HTTPException(status_code=404, detail=f"'{name}' not found.")
@@ -284,8 +329,15 @@ def delete_repository(name: str):
     _refresh_repo_cache()
     return {"deleted": name}
 
-@router.get("/list-apps")
+@router.get("/list-apps", summary="List available application names")
 def list_apps():
+    """
+    Return a sorted list of registered application names.
+
+    Application names are used to identify which database and bridge-plugin
+    context a request belongs to. This endpoint is useful for administrative
+    tooling that needs to enumerate all active applications in the platform.
+    """
     app_names = data.get("app_names")
     return sorted(app_names)
 
