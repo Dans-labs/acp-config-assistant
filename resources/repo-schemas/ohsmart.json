@@ -1259,7 +1259,8 @@
             "embargoDateMin": 2,
             "embargoDateMax": 18250,
             "displayProcesses": false,
-            "maxSize": 9985798963
+            "maxSize": 9985798963,
+            "merge": true
         }
     }
 }

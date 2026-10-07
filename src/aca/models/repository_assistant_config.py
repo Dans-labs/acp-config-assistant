@@ -61,7 +61,7 @@ class TransformedMetadata(BaseModel):
     dir: str | None = None
     generate_file: bool | None = Field(None, alias="generate-file")
     restricted: bool | None = None
-    merge_uploads: bool | None = Field(None, alias='merge-uploads')
+    merge_uploads: bool | None = Field(None, alias="merge-uploads")
 
 
 class ProcessedMetadata(BaseModel):

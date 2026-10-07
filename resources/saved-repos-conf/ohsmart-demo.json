@@ -60,7 +60,7 @@
                         "transformer-url": "http://mts:1745/transform-to-pdf/ohsmart-form-metadata-to-html-pub-vOHCore-v2.xsl",
                         "generate-file": true,
                         "restricted": false
-                        }
+                    }
                 ]
             }
         }
