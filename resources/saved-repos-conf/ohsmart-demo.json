@@ -54,7 +54,13 @@
                         "transformer-url": "http://mts:1745/transform/ohsmart-form-metadata-to-text-pub-vOHCore-v2.xsl",
                         "generate-file": true,
                         "restricted": false
-                    }
+                    },
+                    {
+                        "name": "Oral History metadata public.pdf",
+                        "transformer-url": "http://mts:1745/transform-to-pdf/ohsmart-form-metadata-to-html-pub-vOHCore-v2.xsl",
+                        "generate-file": true,
+                        "restricted": false
+                        }
                 ]
             }
         }
