@@ -22,7 +22,7 @@
                     },
                     {
                         "name": "dataset-files.json",
-                        "transformer-url": "http://mts:1745/transform/ohsmart-form-metadata-to-DV-files-v2.xsl",
+                        "transformer-url": "http://mts:1745/transform/ohsmart-form-metadata-to-DV-files-v3.xsl",
                         "dir": "metadata"
                     },
                     {
